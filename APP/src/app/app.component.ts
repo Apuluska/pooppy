@@ -16,9 +16,19 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'Favoritos',
+      url: '/favoritos',
+      icon: 'heart'
+    },
+    {
+      title: 'Ayuda',
+      url: '/ayuda',
+      icon: 'help-buoy-outline'
+    },
+    {
+      title: 'Acerca de',
+      url: '/acerca',
+      icon: 'md-information-circle'
     }
   ];
 

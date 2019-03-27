@@ -17,17 +17,17 @@ export class AppComponent {
     },
     {
       title: 'Favoritos',
-      url: '/favoritos',
+      url: '/favorites',
       icon: 'heart'
     },
     {
       title: 'Ayuda',
-      url: '/ayuda',
-      icon: 'help-buoy-outline'
+      url: '/help',
+      icon: 'md-help-circle'
     },
     {
       title: 'Acerca de',
-      url: '/acerca',
+      url: '/about',
       icon: 'md-information-circle'
     }
   ];

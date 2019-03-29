@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
-var Bin = require('./binmodel.js');
+var bin = require('./binmodel.js');
 
   var userSchema = new Schema({
     idUser:  ObjectId,

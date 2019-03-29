@@ -1,4 +1,5 @@
 const binModel  = require("../models/binmodel");
+
 class BinProvider{ 
 
   async findAll(){

@@ -2,6 +2,7 @@ const userModel= require("../models/usermodel");
 const binProvider= require("./bin");
 
 class UserProvider{
+
     async getFavoriteBinList(idUser){
         favoriteBins = [];
         var user = await userModel.findById(idUser);
@@ -17,7 +18,7 @@ class UserProvider{
         var binChange = await userModel.findByIdAndUpdate(idUser,{$push: {favoriteBins: idBin}}, {new: true});
         return binChange;
     }
-
+//NO FUNCIONA
     async deleteFavoriteBin(idUser, idBin){
         var binChange = await userModel.updateOne( {idUser: idUser}, { $pull: {favoriteBins: {_id:ObjectId(idBin)} }});
         return binChange;

@@ -54,7 +54,7 @@ app.get("/user/:id/favorite_bins", async function(req, res) {
   const favoriteBins = await userProvider.getFavoriteBinList(userId);
   res.send(favoriteBins);
 });
-
+//De aqui para abajo no he pobrado con posman
 app.post("/user/:id_user/favorite_bins", async function(req, res) {
   let userId = req.params.id_user;
   let binId = req.body.id_bin;

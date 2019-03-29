@@ -1,4 +1,5 @@
-const userModel= require("../models/usermodel");
+const userModel= require("../models");
+
 const binProvider= require("./bin");
 
 class UserProvider{

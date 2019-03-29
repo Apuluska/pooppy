@@ -1,11 +1,11 @@
-/* const binModel = require("././models/binmodel"); */
+const binModel = require("././models/binmodel");
 const userModel= require("././models/usermodel");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const binProvider= require("././providers/bin")
-const userProvider= require("././providers/user")
-
+const binProvider= require("././providers/bin");
+const userProvider= require("././providers/user");
+const jwt = require('./services/jwt');
 const app= express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));//Se usa esta linea para que bodyparser acepte parametros x-www-form-urlencoded
@@ -18,7 +18,6 @@ mongoose.connect("mongodb://localhost:27017/pooppyDB", {useNewUrlParser: true}, 
   }
 });
 
-//userProvider.favoriteBinList("5c9a52dd5f02671f443fb995","5c9a1c36318e3d1e486f7320");
 
  app.listen(3000, () => console.log("Server listening"));
 

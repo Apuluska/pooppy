@@ -10,9 +10,9 @@ exports.createToken = function(user){
         sub: user._id,
         name: user.userName, // opcional
         iat: moment().unix(), // fecha de creación del token, en timestamp en formato unix
-        exp: moment().add(1, 'm').unix(), // tiempo de expiración del token
+        exp: moment().add(7, 'days').unix(), // tiempo de expiración del token
     };
 
-    // nos forma el token como en el ejemplo de la página jwt
+   
     return jwt.encode(payload, secret)
 };

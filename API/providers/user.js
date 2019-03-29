@@ -1,10 +1,11 @@
 const userModel = require("../models/usermodel");
 const binProvider = require("./bin");
 const bcrypt = require("bcrypt");
-const jwt = require('../services/jwt')
+const jwt = require('../services/jwt');
+
 
 class UserProvider {
-    
+
   async getFavoriteBinList(idUser) {
     favoriteBins = [];
     var user = await userModel.findById(idUser);
@@ -37,35 +38,29 @@ class UserProvider {
         user.save();
         return user;*/
   }
+  //estas dos funciones no se han probado login y register
   async login(req, res) {
-    userModel.findOne({ userName: req.body.userName }, function(err, user) {
-      if (user) {
-        // compare recibe 3 parametros: data (datos pasados por post),
-        // hash (datos de usuario) y callback que devuelve un error y una validacion (booleano)
-        bcrypt.compare(req.body.password, user.password).then(function(check) {
-          // 2: si coincide la contraseña con la que está en base de datos
-          if (check) {
-            console.log("TOKEN");
-            // aqui generaremos el token con jwt
-            // se está haciendo por una función externa pero se podría meter el código directamente
-            // al estar en una función puedes usarlo en varios controladores
-            // el token se guardaré en el localstorage del front
-            // No hay que mandar el token al header, se hace automático
-            console.log(jwt.createToken(user));
-          } else {
-            // mandamos 400 porque es error del usuario
-            return "Contraseña incorrecta";
-          }
-        });
-      }
-    });
+    userModel.find({email: req.body.email},(err,user)=>{
+      if (err) return req.status(500).send({message: err})
+      if(!user) return req.status(404).send({message: "No existe el usuario"})
+      req.user= user
+      req.status(200).send({
+        message: "Te has logado correctamente",
+        token:service.createToken(user)
+      })
+    })
   }
-  async register() {
+  async register(req,res) {
     const user = new userModel({
       email: body.email,
       password: body.password
     });
-    return await user.save();
+    return await user.save((err) => {
+        if(err) res.status(500).send({
+         message: `Error al crear usuario: $(err)`})
+         return res.status(200).send({token: service.createToken(user)})
+    });
   }
+
 }
 module.exports = new UserProvider();

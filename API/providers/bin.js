@@ -1,10 +1,10 @@
-const binModel  = require("../models");
+const { binModel }  = require("../models");
 
 class BinProvider{ 
 
   async findAll(){
-      const bins = await binModel.find();
-      return bins;
+      const bins =  binModel.find();
+      return await bins;
   };
 
   async findBinById(id) {
@@ -13,12 +13,12 @@ class BinProvider{
   };
     
   async updateBin(id, info){
-    var binChange= await binModel.findOneAndUpdate({id:id},{$set:{bag:info}}, {new: true},(err, doc) => {
+    var binChange = await binModel.findOneAndUpdate({_id:id},{$set:{bag:info}},(err, doc) => {
       if (err) {
           console.log("Something wrong when updating data!");
       }
   
-      console.log("hola" + doc);
+      console.log("Data inserted is: " + doc);
   })
     return binChange;
   }

@@ -1,7 +1,8 @@
-/* const binModel = require("././models/binmodel"); */
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+
+const registerRoutes =  require('./routes');
 
 const app = express();
 app.use(bodyParser.json());
@@ -12,7 +13,7 @@ mongoose.connect("mongodb://localhost:27017/pooppyDB", {useNewUrlParser: true}, 
   if (err){
       console.log("Error");
   }else{
-      console.log("Connected to database : ");
+      console.log("Connected to database");
   }
 });
 

@@ -1,7 +1,7 @@
 const BinProvider = require('./bin');
-const UsersProvider = require('./users');
+const UserProvider = require('./user');
 
 module.exports = {
     BinProvider,
-    UsersProvider,
+    UserProvider,
 };

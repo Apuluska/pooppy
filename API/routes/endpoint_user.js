@@ -26,16 +26,12 @@ function userRoutes(app) {
     });
 
     app.post("/user/login", async function (req, res) {
-        let userEmail = req.body.id_bin;
-        let userPassword = req.body.id_bin;
-        const user = await UserProvider.login(userEmail, userPassword);
+        const user = await UserProvider.login;
         res.send(user);
     });
 
     app.post("/user/register", async function (req, res) {
-        let userEmail = req.body.id_bin;
-        let userPassword = req.body.id_bin;
-        const user = await UserProvider.register(userEmail, userPassword);
+        const user = await UserProvider.register;
         res.send(user);
     });
 

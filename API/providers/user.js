@@ -34,34 +34,36 @@ class UserProvider {
   }
 
   async login(req, res) {
-    userModel.findOne({ userName: req.body.userName }, function (err, user) {
-      if (user) {
-        // compare recibe 3 parametros: data (datos pasados por post),
-        // hash (datos de usuario) y callback que devuelve un error y una validacion (booleano)
-        bcrypt.compare(req.body.password, user.password).then(function (check) {
-          // 2: si coincide la contraseña con la que está en base de datos
-          if (check) {
-            console.log("TOKEN");
-            // aqui generaremos el token con jwt
-            // se está haciendo por una función externa pero se podría meter el código directamente
-            // al estar en una función puedes usarlo en varios controladores
-            // el token se guardaré en el localstorage del front
-            // No hay que mandar el token al header, se hace automático
-            console.log(jwt.createToken(user));
-          } else {
-            // mandamos 400 porque es error del usuario
-            return "Contraseña incorrecta";
-          }
+    userModel.find({email: req.body.email},(err,user)=>{
+      if (err) return res.status(500).send({message: err})
+      if(!user) return res.status(200).send({message: "Usuario o clave incorrecta"})
+        bcrypt.compare(req.body.password, user.password, function(err, res) {
+            if(res){
+                return res.status(200).send({
+                    message: "Te has logado correctamente",
+                    token:service.createToken(user)
+                })
+            }else{
+                return res.status(200).send({message: "Usuario o clave incorrecta"})
+            }
         });
-      }
-    });
+
+    })
   }
-  async register() {
-    const user = new userModel({
-      email: body.email,
-      password: body.password
+
+  register(req,res) {
+    var saltRounds = 10;
+    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+        const user = new userModel({
+            email: req.body.email,
+            password: hash
+        });
+        return  user.save((err) => {
+            if(err) res.status(500).send({
+                message: `Error al crear usuario: $(err)`})
+            return res.status(200).send({token: service.createToken(user)})
+        });
     });
-    return await user.save();
   }
 }
 module.exports = new UserProvider();

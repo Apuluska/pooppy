@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { MatMenuModule} from '@angular/material/menu';
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
 @NgModule({
@@ -23,12 +23,13 @@ import { MatMenuModule} from '@angular/material/menu';
     MatButtonModule,
     MatCheckboxModule,
     MatMenuModule,
-    ],
-
+  ],
+  
   providers: [
+    Geolocation,
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })

@@ -23,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'about', loadChildren: './about/about.module#AboutPageModule'
-  }
+  },  { path: 'selected-bin', loadChildren: './selected-bin/selected-bin.module#SelectedBinPageModule' }
+
 ];
 
 @NgModule({

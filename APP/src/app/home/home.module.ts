@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { SelectedBinPage } from '../selected-bin/selected-bin.page';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { HomePage } from './home.page';
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, SelectedBinPage],
+  entryComponents: [SelectedBinPage]
 })
 export class HomePageModule {}

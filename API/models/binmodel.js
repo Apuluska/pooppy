@@ -13,5 +13,6 @@ var mongoose = require('mongoose');
 },
 { collection : 'bin' });
 
-const binModel = mongoose.model("bin", binSchema);
+const binModel = mongoose.model('bin', binSchema);
+
 module.exports = binModel;

@@ -1,42 +1,44 @@
 const { userModel } = require("../models");
 
-const binProvider= require("./bin");
+const binProvider = require("./bin");
 
 class UserProvider {
-    
-  async getFavoriteBinList(idUser) {
-    let user = await userModel.findById(idUser);
-    return user;
-  }
 
-  //Se crea un id nuevo cada vez que se hace un push
-  async addFavoriteBin(idUser, idBin) {
+  async getFavoriteBinList(userId) {
+    var favoriteBinsInfo = [];
+    let user = await userModel.findById(userId);
+    user.favoriteBins.map(async (binId) => {
+      let binInfo = binProvider.findBinById(binId);
+      favoriteBinsInfo.push(binInfo);
+      return favoriteBinsInfo;
+    });
+    const resolvedFinalArray = await Promise.all(favoriteBinsInfo); 
+    return resolvedFinalArray;
+  }
+  
+  async addFavoriteBin(userId, idBin) {
     let binChange = await userModel.findByIdAndUpdate(
-      idUser,
+      userId,
       { $push: { favoriteBins: idBin } },
       { new: true }
     );
     return binChange;
   }
-  //NO FUNCIONA
+
   async deleteFavoriteBin(idUser, idBin) {
-    let binChange = await userModel.updateOne(
-      { idUser: idUser },
-      { $pull: { favoriteBins: { _id: ObjectId(idBin) } } }
+    let binChange = await userModel.update(
+      { _id: idUser },
+      { $pull: { favoriteBins: { $in: idBin } } }
     );
     return binChange;
-
-    /*let user = userModel.findById(idUser);
-        user.favoriteBins.remove(idBin);
-        user.save();
-        return user;*/
   }
+
   async login(req, res) {
-    userModel.findOne({ userName: req.body.userName }, function(err, user) {
+    userModel.findOne({ userName: req.body.userName }, function (err, user) {
       if (user) {
         // compare recibe 3 parametros: data (datos pasados por post),
         // hash (datos de usuario) y callback que devuelve un error y una validacion (booleano)
-        bcrypt.compare(req.body.password, user.password).then(function(check) {
+        bcrypt.compare(req.body.password, user.password).then(function (check) {
           // 2: si coincide la contraseña con la que está en base de datos
           if (check) {
             console.log("TOKEN");

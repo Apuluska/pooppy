@@ -3,6 +3,16 @@ const { userModel } = require("../models");
 const binProvider= require("./bin");
 
 class UserProvider {
+  
+  async getFavoriteBinList(idUser){
+    favoriteBins = [];
+    var user = await userModel.findById(idUser);
+    user.favoriteBins.forEach(binId => {
+        bin = binProvider.findBinById(binId);
+        favoriteBins.push(bin);
+    });
+    return favoriteBins;
+}
 
   async getFavoriteBinList(idUser) {
     let user = await userModel.findById(idUser);
@@ -31,29 +41,38 @@ class UserProvider {
         user.save();
         return user;*/
   }
-  //estas dos funciones no se han probado login y register
+
   async login(req, res) {
     userModel.find({email: req.body.email},(err,user)=>{
-      if (err) return req.status(500).send({message: err})
-      if(!user) return req.status(404).send({message: "No existe el usuario"})
-      req.user= user
-      req.status(200).send({
-        message: "Te has logado correctamente",
-        token:service.createToken(user)
-      })
+      if (err) return res.status(500).send({message: err})
+      if(!user) return res.status(200).send({message: "Usuario o clave incorrecta"})
+        bcrypt.compare(req.body.password, user.password, function(err, res) {
+            if(res){
+                return res.status(200).send({
+                    message: "Te has logado correctamente",
+                    token:service.createToken(user)
+                })
+            }else{
+                return res.status(200).send({message: "Usuario o clave incorrecta"})
+            }
+        });
+
     })
   }
-  async register(req,res) {
-    const user = new userModel({
-      email: body.email,
-      password: body.password
-    });
-    return await user.save((err) => {
-        if(err) res.status(500).send({
-         message: `Error al crear usuario: $(err)`})
-         return res.status(200).send({token: service.createToken(user)})
+
+  register(req,res) {
+    var saltRounds = 10;
+    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+        const user = new userModel({
+            email: req.body.email,
+            password: hash
+        });
+        return  user.save((err) => {
+            if(err) res.status(500).send({
+                message: `Error al crear usuario: $(err)`})
+            return res.status(200).send({token: service.createToken(user)})
+        });
     });
   }
-
 }
 module.exports = new UserProvider();

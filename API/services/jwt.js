@@ -3,7 +3,7 @@ var moment = require('moment'); // para tratar fechas de modo más amigable
 var secret = 'clave_secreta_curso'; // clave que se usa en el algoritmo de encriptación
 
 // generar token exclusivo y asociado a cada usuario
-exports.createToken = function(user){
+createToken = function(user){
     // parámetros que vamos a utilizar para generar el token
     // normalmente solo necesitaríamos el id de usuario referente al user
     var payload = {
@@ -16,3 +16,4 @@ exports.createToken = function(user){
    
     return jwt.encode(payload, secret)
 };
+

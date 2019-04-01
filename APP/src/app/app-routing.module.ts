@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { TermsConditionsPageModule } from './termsconditions/termsconditions.module';
 
 const routes: Routes = [
   {
@@ -23,6 +24,12 @@ const routes: Routes = [
   },
   {
     path: 'about', loadChildren: './about/about.module#AboutPageModule'
+  },
+  {
+    path: 'termsconditions', loadChildren: './termsconditions/termsconditions.module#TermsConditionsPageModule'
+  },
+  {
+    path: 'privacypolicy', loadChildren: './privacypolicy/privacypolicy.module#PrivacyPolicyPageModule'
   }
 ];
 

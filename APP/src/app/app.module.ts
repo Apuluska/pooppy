@@ -8,6 +8,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { MatMenuModule} from '@angular/material/menu';
+
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,8 +19,12 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
-  ],
+    AppRoutingModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    ],
+
   providers: [
     StatusBar,
     SplashScreen,

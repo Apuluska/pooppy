@@ -1,9 +1,33 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Ayuda</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<ion-menu side="start" menuId="custom" class="my-custom-menu">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>Ayuda</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list class="faq">
+      <ion-button expand="full">Preguntas frecuentes
+      </ion-button>
+      <ion-card>
+        <ion-item (click)="ExpandItem(p.Id)" *ngFor="let p of faq" margin-bottom>
+          <ion-label>Sitio para poner una pregunta frecuente</ion-label>
+          <ion-button fill="outline" slot="end">View</ion-button>
+        </ion-item>
+        <ion-card-content>
+          Aquí va la respuesta a la pregunta
+        </ion-card-content>
+      </ion-card>
+      <ion-button expand="full">Contacto</ion-button>
+      <ion-card>
+        <ion-item>
+          <ion-label>Sitio para poner una pregunta frecuente </ion-label>
+          <ion-button expand="full" fill="outline" slot="end">View</ion-button>
+        </ion-item>
+        <ion-card-content>
+          Aquí va la respuesta a la pregunta
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-router-outlet main></ion-router-outlet>

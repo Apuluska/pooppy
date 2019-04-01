@@ -1,10 +1,17 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Favoritos</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
+    <ion-split-pane contentId="menu-content">
+        <!--  our side menu  -->
+        <ion-menu contentId="menu-content">
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Menu</ion-title>
+            </ion-toolbar>
+          </ion-header>
+        </ion-menu>
+      
+        <!-- the main content -->
+        <ion-router-outlet id="menu-content"></ion-router-outlet>
+      </ion-split-pane>
   <!-- <ion-list>
     <ion-item *ngFor="let item of items">
       <ion-icon [name]="item.icon" slot="start"></ion-icon>
@@ -19,4 +26,3 @@
       You navigated here from <b>{{selectedItem.title }}</b>
     </div>
   -->
-</ion-content>

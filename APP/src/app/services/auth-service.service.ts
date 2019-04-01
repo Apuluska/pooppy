@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
  */
 import { promise } from 'protractor';
 import { Router } from '@angular/router';
+import { stringify } from '@angular/core/src/render3/util';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,10 @@ export class AuthService {
       }).catch(err => rejected(err));
     }); */
   }
-
+  createUser(email: string, userName: string, password: string ) {
+    this.router.navigate(['/home']);
+    /* cuando esté hecho el backend, creará usuario.  */
+  }
 
   logOut() {
     /* ESTA PARTE HAY QUE DESCOMENTARLA CUANDO CONECTEMOS CON LA BBDD

@@ -26,13 +26,11 @@ function userRoutes(app) {
     });
 
     app.post("/user/login", async function (req, res) {
-        const user = await UserProvider.login;
-        res.send(user);
+        await UserProvider.login(req,res);
     });
 
     app.post("/user/register", async function (req, res) {
-        const user = await UserProvider.register;
-        res.send(user);
+        await UserProvider.register(req,res);
     });
 
 }

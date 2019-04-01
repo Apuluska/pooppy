@@ -8,7 +8,6 @@ createToken = function(user){
     // normalmente solo necesitaríamos el id de usuario referente al user
     var payload = {
         sub: user._id,
-        name: user.userName, // opcional
         iat: moment().unix(), // fecha de creación del token, en timestamp en formato unix
         exp: moment().add(7, 'days').unix(), // tiempo de expiración del token
     };
@@ -16,4 +15,8 @@ createToken = function(user){
    
     return jwt.encode(payload, secret)
 };
+
+module.exports = {
+    createToken
+}
 

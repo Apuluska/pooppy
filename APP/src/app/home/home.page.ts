@@ -1,77 +1,59 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, Platform } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { LoadingController } from '@ionic/angular';
 
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker
-} from '@ionic-native/google-maps';
+declare var google;
 
-@IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  map: GoogleMap;
+  mapRef = null;
 
   constructor(
-    private navCtrl: NavController,
-    private googleMaps: GoogleMaps
-  ) {}
+    private geolocation: Geolocation,
+    private loadingCtrl: LoadingController
+  ) {
 
-  ionViewDidLoad(){
+  }
+
+  ngOnInit() {
     this.loadMap();
   }
 
-  loadMap(){
-
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: 43.0741904, // default location
-          lng: -89.3809802 // default location
-        },
-        zoom: 18,
-        tilt: 30
-      }
-    };
-
-    this.map = this.googleMaps.create('map_canvas', mapOptions);
-
-    // Wait the MAP_READY before using any methods.
-    this.map.one(GoogleMapsEvent.MAP_READY)
-    .then(() => {
-      // Now you can use all methods safely.
-      this.getPosition();
-    })
-    .catch(error =>{
-      console.log(error);
+  async loadMap() {
+    const loading = await this.loadingCtrl.create();
+    loading.present();
+    const myLatLng = await this.getLocation();
+    const mapEle: HTMLElement = document.getElementById('map');
+    this.mapRef = new google.maps.Map(mapEle, {
+      center: myLatLng,
+      zoom: 12
     });
-
+    google.maps.event
+    .addListenerOnce(this.mapRef, 'idle', () => {
+      loading.dismiss();
+      this.addMaker(myLatLng.lat, myLatLng.lng);
+    });
   }
 
-  getPosition(): void{
-    this.map.getMyLocation()
-    .then(response => {
-      this.map.moveCamera({
-        target: response.latLng
-      });
-      this.map.addMarker({
-        title: 'My Position',
-        icon: 'bin_point_true.svg',
-        animation: 'DROP',
-        position: response.latLng
-      });
-    })
-    .catch(error =>{
-      console.log(error);
+  private addMaker(lat: number, lng: number) {
+    const marker = new google.maps.Marker({
+      position: { lat, lng },
+      map: this.mapRef,
+      title: 'Hello World!'
     });
+  }
+
+  private async getLocation() {
+    const rta = await this.geolocation.getCurrentPosition();
+    return {
+      lat: rta.coords.latitude,
+      lng: rta.coords.longitude
+    };
   }
 
 }

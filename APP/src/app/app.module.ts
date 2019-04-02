@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { MatMenuModule} from '@angular/material/menu';
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { InjectionToken } from '@angular/core';
 
 
 
@@ -23,11 +25,13 @@ import { MatMenuModule} from '@angular/material/menu';
     MatButtonModule,
     MatCheckboxModule,
     MatMenuModule,
+    InjectionToken
     ],
 
   providers: [
     StatusBar,
     SplashScreen,
+    GoogleMaps,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

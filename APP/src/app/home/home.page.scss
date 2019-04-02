@@ -1,6 +1,9 @@
-.map {
-  max-height: 35vh;
-  overflow: hidden;
+page-home {
+  #map_canvas{
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
 }
 .ion-color-primary{
   background-color: #70CCC6;

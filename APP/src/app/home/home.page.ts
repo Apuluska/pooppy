@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-import { ModalController } from '@ionic/angular';
-import { SelectedBinPage } from '../selected-bin/selected-bin.page';
+import { Bin } from '../bin';
+import { BinsService } from '../services/bins.service';
 
 @Component({
   selector: 'app-home',
@@ -13,17 +13,29 @@ import { SelectedBinPage } from '../selected-bin/selected-bin.page';
 export class HomePage {
 
   latitude: number;
-  longitude:number;
+  longitude: number;
+  public bin: Bin[];
 
-  constructor(private geolocation: Geolocation, public modalController: ModalController) { }
+  constructor(private geolocation: Geolocation, private binsService: BinsService) { }
 
-  getLocation(){
+  getBinData(): void {
+    this.binsService.getBinData()
+      .subscribe(
+        (bin_observable) => this.bin = bin_observable
+      );
+  }
+
+  ngOnInit() {
+    this.getBinData();
+  }
+
+  getLocation() {
 
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude
       this.longitude = resp.coords.longitude
     }).catch((error) => {
-      console.log('Error getting location', error);
+      
     });
 
     let watch = this.geolocation.watchPosition();
@@ -32,12 +44,5 @@ export class HomePage {
       // data.coords.latitude
       // data.coords.longitude
     });
-  }
-
-  async openModal() {
-    const modal = await this.modalController.create({
-      component: SelectedBinPage
-    });
-    return await modal.present();
   }
 }

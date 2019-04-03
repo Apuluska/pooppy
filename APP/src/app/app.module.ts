@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { MatMenuModule} from '@angular/material/menu';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +23,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     MatButtonModule,
     MatCheckboxModule,
     MatMenuModule,
+    HttpClientModule
   ],
   
   providers: [

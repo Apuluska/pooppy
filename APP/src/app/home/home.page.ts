@@ -5,7 +5,7 @@ import { LoadingController } from '@ionic/angular';
 declare var google;
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-home', 
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
@@ -25,7 +25,6 @@ export class HomePage implements OnInit {
   }
 
   async loadMap() {
-    console.log("en loadMap");
     const loading = await this.loadingCtrl.create();
     loading.present();
     const myLatLng = await this.getLocation();
@@ -45,8 +44,7 @@ export class HomePage implements OnInit {
     const marker = new google.maps.Marker({
       position: { lat, lng },
       map: this.mapRef,
-      title: 'Hello World!',
-     /*  icon: '../enviroments/bin_point_true.svg' */
+      title: 'Hello World!'
     });
   }
 
@@ -57,4 +55,5 @@ export class HomePage implements OnInit {
       lng: rta.coords.longitude
     };
   }
+
 }

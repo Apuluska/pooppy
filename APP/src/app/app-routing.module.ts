@@ -24,6 +24,7 @@ const routes: Routes = [
   {
     path: 'about', loadChildren: './about/about.module#AboutPageModule'
   }
+
 ];
 
 @NgModule({

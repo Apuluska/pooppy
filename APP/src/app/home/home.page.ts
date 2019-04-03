@@ -4,6 +4,10 @@ import { LoadingController } from '@ionic/angular';
 
 declare var google;
 
+
+import { Bin } from '../bin';
+import { BinsService } from '../services/bins.service';
+
 @Component({
   selector: 'app-home', 
   templateUrl: 'home.page.html',
@@ -15,13 +19,15 @@ export class HomePage implements OnInit {
 
   constructor(
     private geolocation: Geolocation,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private binsService: BinsService,
   ) {
 
   }
 
   ngOnInit() {
     this.loadMap();
+    this.getBinData();
   }
 
   async loadMap() {
@@ -44,7 +50,8 @@ export class HomePage implements OnInit {
     const marker = new google.maps.Marker({
       position: { lat, lng },
       map: this.mapRef,
-      title: 'Hello World!'
+      title: 'Hello World!',
+      icon: './bin_point_true.svg'
     });
   }
 
@@ -55,5 +62,19 @@ export class HomePage implements OnInit {
       lng: rta.coords.longitude
     };
   }
+
+  latitude: number;
+  longitude: number;
+  public bin: Bin[];
+
+
+
+  getBinData(): void {
+    this.binsService.getBinData()
+      .subscribe(
+        (bin_observable) => this.bin = bin_observable
+      );
+  }
+
 
 }

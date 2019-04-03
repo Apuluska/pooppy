@@ -1,8 +1,17 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+
 /** Ionic CSS Variables **/
 :root {
+
+  --blue: #70CCC6;
+  --light-gray: #F2F2F2;
+  --dark-gray: #D5D5D5;
+
+  --font: 'Raleway', sans-serif;
+  --font-medium: 600;
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;

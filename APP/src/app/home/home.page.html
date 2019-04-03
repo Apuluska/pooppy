@@ -1,11 +1,18 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
   <div id="map"></div>
+<li *ngFor="let info of bin">
+    <span>{{info.address}}</span>
+</li>
+<div class="favorite-tab">
+  <div>
+    <p>Esta es la calle</p>
+  </div>
+  <div class="buttons">
+    <button class="bags"></button>
+    <button class="favorite" (click)="addfavorite()"></button>
+  </div>
+</div>
+<ion-content padding>
+  This is the latitude: {{latitude}} <br>
+  This is the longitude: {{longitude}} <br>
+  <button ion-button (click)="getLocation()">TEST LOCATION</button>
 </ion-content>

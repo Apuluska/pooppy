@@ -30,7 +30,8 @@ const routes: Routes = [
   {
     path: 'privacypolicy', loadChildren: './privacypolicy/privacypolicy.module#PrivacyPolicyPageModule'
   },
-  { path: 'team', loadChildren: './team/team.module#TeamPageModule' }
+  { path: 'team', loadChildren: './team/team.module#TeamPageModule' },
+  { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule' }
 ];
 
 @NgModule({

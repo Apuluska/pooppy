@@ -21,7 +21,7 @@ export class AuthService {
       }).catch(err => rejected(err));
     }); */
   }
-  createUser(email: string, userName: string, password: string ) {
+  createUser(email: string, password: string ) {
     this.router.navigate(['/home']);
     /* cuando esté hecho el backend, creará usuario.  */
   }

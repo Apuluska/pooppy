@@ -1,27 +1,22 @@
 <ion-content padding center text-center>
-  <ion-img slot="start" class="fakeDog" src="../assets/img/fakeDog.png">
-  </ion-img>
-  <!-- <ion-img class="fakeDog" src="../assets/img/fakeDog.png">
-  </ion-img> -->
-  <ion-title>Pooppy
-  </ion-title>
   <ion-list>
+    <div class="avatarCircle"></div>
+    <img class="iconDog" src="../assets/img/fakeDog.png">
     <ion-item>
-      <ion-input usertype="text" [(ngModel)]= user.username placeholder="Introduce tu nombre completo" *ngIf = "verNombre === true">
-        <ion-img class="iconLogin" src=""></ion-img>
-      </ion-input>
+      <input class="exampleText" usertype="text" [(ngModel)]=user.email placeholder="Introduce tu correo"
+        *ngIf="verNombre === true">
+      <img class="iconLogin">
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]= user.email placeholder="Introduce tu correo electrónico">
-        <ion-img class="iconLogin" src=""></ion-img>
-      </ion-input>
+      <input class="exampleText" type="text" [(ngModel)]=user.email placeholder="Introduce tu correo electrónico">
+    <img class="iconLogin">
     </ion-item>
     <ion-item>
-      <ion-input placeholder="Contraseña" type=password [(ngModel)]= user.password>
-        <ion-img class="iconLogin" src=""></ion-img>
-      </ion-input>
-    </ion-item>
+      <input class="exampleText" placeholder="Contraseña" type=password [(ngModel)]=user.password>
+      <img class="iconLogin">
+      </ion-item>
   </ion-list>
-  <ion-button (click)="onSubmitLogin()" expand="block">Entra</ion-button>
-  <ion-button color="primary" (click)="goRegister()" expand="block" *ngIf = "verNombre === false"> Regístrate </ion-button>
+  <button class="button" (click)="onSubmitLogin()" expand="block">Entra</button>
+  <button class="button" color="primary" (click)="goRegister()" expand="block" *ngIf="verNombre === false"> Regístrate
+  </button>
 </ion-content>

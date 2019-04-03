@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../services/auth-service.service';
 import { Router } from '@angular/router';
 import { User } from '../user';
-import { LoginPageModule } from './login.module';
 
 
 @Component({
@@ -23,12 +22,11 @@ export class LoginPage implements OnInit {
 newUser() {
   this.user.email = '';
   this.user.password = '';
-  this.user.username = '';
 
 }
 onSubmitLogin() {
   if (this.verNombre === true) {
-    this.authService.createUser(this.user.email, this.user.username, this.user.password);
+    this.authService.createUser(this.user.email, this.user.password);
   } else {
     this.authService.login(this.user.email, this.user.password);
   }

@@ -5,7 +5,7 @@ import { LoadingController } from '@ionic/angular';
 declare var google;
 
 @Component({
-  selector: 'app-home', 
+  selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })

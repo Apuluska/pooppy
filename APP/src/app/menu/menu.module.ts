@@ -10,7 +10,42 @@ import { MenuPage } from './menu.page';
 const routes: Routes = [
   {
     path: '',
-    component: MenuPage
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: '',
+    component: MenuPage,
+    children: [
+      {
+        path: 'home',
+        loadChildren: '../home/home.module#HomePageModule'
+      },
+      {
+        path: 'favorites',
+        loadChildren: '../favorites/favorites.module#FavoritesPageModule'
+      },
+      {
+        path: 'help',
+        loadChildren: '../help/help.module#HelpPageModule'
+      },
+      {
+        path: 'about',
+        loadChildren: '../about/about.module#AboutPageModule'
+      },
+      {
+        path: 'termsconditions',
+        loadChildren: '../termsconditions/termsconditions.module#TermsConditionsPageModule'
+      },
+      {
+        path: 'privacypolicy',
+        loadChildren: '../privacypolicy/privacypolicy.module#PrivacyPolicyPageModule'
+      },
+      {
+        path: 'team',
+        loadChildren: '../team/team.module#TeamPageModule'
+      },
+    ]
   }
 ];
 
@@ -23,4 +58,4 @@ const routes: Routes = [
   ],
   declarations: [MenuPage]
 })
-export class MenuPageModule {}
+export class MenuPageModule { }

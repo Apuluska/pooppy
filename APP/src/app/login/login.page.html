@@ -1,14 +1,9 @@
 <ion-content padding center text-center>
-  <ion-list>
+    <ion-list>
     <div class="avatarCircle"></div>
     <img class="iconDog" src="../assets/img/fakeDog.png">
     <ion-item>
-      <input class="exampleText" usertype="text" [(ngModel)]=user.email placeholder="Introduce tu correo"
-        *ngIf="checkMail === true">
-      <img class="iconLogin">
-    </ion-item>
-    <ion-item>
-        <img class="iconLog" src="../assets/icon/emailIcon.png">
+      <img class="iconLog" src="../assets/icon/emailIcon.png">
       <input class="exampleText" type="text" [(ngModel)]=user.email placeholder="Introduce tu correo electrónico">
     </ion-item>
     <ion-item>
@@ -16,13 +11,14 @@
       <input class="exampleText" placeholder="Contraseña" type=password [(ngModel)]=user.password>
       </ion-item>
   </ion-list>
-  <button class="button" (click)="onSubmitLogin()" expand="block">Entra</button>
-  <button class="button" color="primary" (click)="goRegister()" expand="block" *ngIf="checkMail === false"> Regístrate
+  <button class="button" (click)="onSubmitLogin()" expand="block" *ngIf="checkMail === true">Entra
+  </button>
+  <button class="button" color="primary" (click)="onSubmitLogin()" expand="block" *ngIf="checkMail === false"> Regístrate
   </button>
 </ion-content>
 <ion-footer>
     <ion-toolbar>
-    <div class=notRegistered>¿AÚN NO TE HAS REGISTRADO?<a href="/login">Regístrate</a>
+    <div class=notRegistered>¿AÚN NO TE HAS REGISTRADO?<a (click)="goRegister()">Regístrate</a>
     </div>
     </ion-toolbar>
   </ion-footer>

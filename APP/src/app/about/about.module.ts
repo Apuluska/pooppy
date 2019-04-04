@@ -10,7 +10,12 @@ import { AboutPage } from './about.page';
 const routes: Routes = [
   {
     path: '',
-    component: AboutPage
+    children: [
+      {
+        path: '',
+        component: AboutPage
+        },
+    ]
   }
 ];
 

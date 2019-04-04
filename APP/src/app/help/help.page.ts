@@ -8,18 +8,8 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./help.page.scss'],
 })
 export class HelpPage implements OnInit {
-
-  pages = [
-    {
-      title: 'First page with Tabs',
-      url: '/menu/first'
-    },
-    {
-      title: 'Second page blank',
-      url: '/menu/second'
-    }
-  ];
   selectedPath = '';
+  public pages = [ ];
 
   constructor(private menu:
     MenuController) {

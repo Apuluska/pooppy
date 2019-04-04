@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-help',
   templateUrl: './help.page.html',
@@ -12,8 +11,7 @@ export class HelpPage implements OnInit {
   public pages = [ ];
 
   constructor(private menu:
-    MenuController) {
-  }
+    MenuController) { }
 
   ngOnInit() {
   }

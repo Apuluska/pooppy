@@ -8,12 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { MenuPage } from './menu.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  {
+   {
     path: '',
     component: MenuPage,
     children: [
@@ -27,23 +22,23 @@ const routes: Routes = [
       },
       {
         path: 'help',
-        loadChildren: '../help/help.module#HelpPageModule'
+        loadChildren: './help/help.module#HelpPageModule'
       },
       {
         path: 'about',
-        loadChildren: '../about/about.module#AboutPageModule'
+        loadChildren: './about/about.module#AboutPageModule'
       },
       {
         path: 'termsconditions',
-        loadChildren: '../termsconditions/termsconditions.module#TermsConditionsPageModule'
+        loadChildren: './termsconditions/termsconditions.module#TermsConditionsPageModule'
       },
       {
         path: 'privacypolicy',
-        loadChildren: '../privacypolicy/privacypolicy.module#PrivacyPolicyPageModule'
+        loadChildren: './privacypolicy/privacypolicy.module#PrivacyPolicyPageModule'
       },
       {
         path: 'team',
-        loadChildren: '../team/team.module#TeamPageModule'
+        loadChildren: './team/team.module#TeamPageModule'
       },
     ]
   }

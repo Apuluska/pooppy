@@ -13,17 +13,7 @@ import { MatMenuModule} from '@angular/material/menu';
 const routes: Routes = [
   {
     path: '',
-    component: HelpPage,
-    /* children: [
-      {
-        path: 'first',
-        loadChildren: '../frist-with-tabs/first-with-tabs.module#FistWithTabsPageModule'
-      },
-      {
-        path: 'second',
-        loadChildren: '../second/second.module#SecondPageModule'
-      }
-    ] */
+    component: HelpPage
   }
 ];
 

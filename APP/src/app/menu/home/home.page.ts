@@ -6,24 +6,21 @@ declare var google;
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
   mapRef = null;
+
 
   constructor(
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.loadMap();
   }
-
   async loadMap() {
     const loading = await this.loadingCtrl.create();
     loading.present();
@@ -55,5 +52,4 @@ export class HomePage implements OnInit {
       lng: rta.coords.longitude
     };
   }
-
 }

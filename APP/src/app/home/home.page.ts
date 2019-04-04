@@ -50,6 +50,7 @@ export class HomePage implements OnInit {
       loading.dismiss();
       this.addMaker(myLatLng.lat, myLatLng.lng);
     });
+    this.getBinData();
   }
 
   private addMaker(lat: number, lng: number) {
@@ -57,16 +58,18 @@ export class HomePage implements OnInit {
       position: { lat, lng },
       map: this.mapRef,
       title: 'Hello World!',
-      icon:'http://localhost:8100/assets/img/a.png',
-    });
+      icon:'assets/img/bin_point_true.svg',
+    }); 
   }
-
+ 
 
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
     return {
-      lat: rta.coords.latitude,
-      lng: rta.coords.longitude
+/*       lat: rta.coords.latitude,
+      lng: rta.coords.longitude */
+      lat: 40.41886,
+      lng: -3.7117,
     };
   }
 
@@ -75,27 +78,27 @@ export class HomePage implements OnInit {
     this.binsService.getBinData()
       .subscribe(
       (bin_observable) => {
-        for(let i = 0; i < bin_observable.length;i++){
+       // bin_observable.length
+        for(let i = 0; i <10;i++){
           let lat = parseFloat(bin_observable[i].address[0].lat);
           let lng = parseFloat(bin_observable[i].address[0].lng);
           let statusBin= bin_observable[i].bag;
-         /*  console.log(statusBin) */
           if (statusBin===true){
             new google.maps.Marker({
             position: { lat, lng },
               map: this.mapRef,
               title: bin_observable[i].address[0].addressName,
-              /* icon:'assets/img/blue-marker.png', */
+              icon:'assets/img/bin_point_true.svg'
             });
           }
-/*           else{
+          else{
           new google.maps.Marker({
           position: { lat, lng },
             map: this.mapRef,
             title: bin_observable[i].address[0].addressName,
-         
+            icon:'assets/img/bin_point_false.svg'
           });
-        } */
+        } 
         }
         
       });

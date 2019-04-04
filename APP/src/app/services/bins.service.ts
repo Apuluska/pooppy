@@ -19,4 +19,5 @@ export class BinsService {
   getBinData(): Observable<Array<Bin>> {
     return this.http.get<Bin[]>(this.binUrl)
   }
+  
 }

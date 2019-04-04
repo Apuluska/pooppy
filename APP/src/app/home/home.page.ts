@@ -16,6 +16,11 @@ import { BinsService } from '../services/bins.service';
 export class HomePage implements OnInit {
 
   mapRef = null;
+  
+  latitude: number;
+  longitude: number;
+  public bin: Bin[];
+
 
   constructor(
     private geolocation: Geolocation,
@@ -24,13 +29,14 @@ export class HomePage implements OnInit {
   ) {
 
   }
-
+ 
   ngOnInit() {
     this.loadMap();
     this.getBinData();
   }
 
   async loadMap() {
+    
     const loading = await this.loadingCtrl.create();
     loading.present();
     const myLatLng = await this.getLocation();
@@ -47,13 +53,13 @@ export class HomePage implements OnInit {
   }
 
   private addMaker(lat: number, lng: number) {
-    const marker = new google.maps.Marker({
+    new google.maps.Marker({
       position: { lat, lng },
       map: this.mapRef,
-      title: 'Hello World!',
-      icon: './bin_point_true.svg'
+      title: 'Hello World!'
     });
   }
+
 
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
@@ -63,18 +69,22 @@ export class HomePage implements OnInit {
     };
   }
 
-  latitude: number;
-  longitude: number;
-  public bin: Bin[];
 
-
-
-  getBinData(): void {
+  getBinData(): any {
     this.binsService.getBinData()
       .subscribe(
-        (bin_observable) => this.bin = bin_observable
-      );
+      (bin_observable) => {
+        for(let i = 0; i < bin_observable.length;i++){
+          let lat = parseFloat(bin_observable[i].address[0].lat);
+          let lng = parseFloat(bin_observable[i].address[0].lng);
+          console.log(bin_observable[i])
+          new google.maps.Marker({
+          position: { lat, lng },
+            map: this.mapRef,
+            title: bin_observable[i].address[0].addressName,
+          });
+        }
+        
+      });
   }
-
-
 }

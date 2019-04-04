@@ -56,7 +56,8 @@ export class HomePage implements OnInit {
     new google.maps.Marker({
       position: { lat, lng },
       map: this.mapRef,
-      title: 'Hello World!'
+      title: 'Hello World!',
+      icon:'http://localhost:8100/assets/img/a.png',
     });
   }
 
@@ -77,12 +78,24 @@ export class HomePage implements OnInit {
         for(let i = 0; i < bin_observable.length;i++){
           let lat = parseFloat(bin_observable[i].address[0].lat);
           let lng = parseFloat(bin_observable[i].address[0].lng);
-          console.log(bin_observable[i])
+          let statusBin= bin_observable[i].bag;
+         /*  console.log(statusBin) */
+          if (statusBin===true){
+            new google.maps.Marker({
+            position: { lat, lng },
+              map: this.mapRef,
+              title: bin_observable[i].address[0].addressName,
+              /* icon:'assets/img/blue-marker.png', */
+            });
+          }
+/*           else{
           new google.maps.Marker({
           position: { lat, lng },
             map: this.mapRef,
             title: bin_observable[i].address[0].addressName,
+         
           });
+        } */
         }
         
       });

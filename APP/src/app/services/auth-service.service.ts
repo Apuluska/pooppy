@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private router: Router) { }
 
   login(email: string, password: string) {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/menu/home']);
 
    /*  ESTA PARTE HAY QUE DESCOMENTARLA CUANDO CONECTEMOS CON LA BBDD
    return new Promise((resolve, rejected) => {
@@ -22,7 +22,7 @@ export class AuthService {
     }); */
   }
   createUser(email: string, password: string ) {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/menu/home']);
     /* cuando esté hecho el backend, creará usuario.  */
   }
 

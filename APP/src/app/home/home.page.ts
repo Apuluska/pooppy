@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
 
+
 declare var google;
 
 
 import { Bin } from '../bin';
 import { BinsService } from '../services/bins.service';
-import {SelectedBinComponent } from 'selected-bin/selected-bin.component'
+/* import {SelectedBinComponent } from 'selected-bin/selected-bin.component' */
 
 @Component({
   selector: 'app-home', 
@@ -46,7 +47,8 @@ export class HomePage implements OnInit {
       center: myLatLng,
       zoom: 12,
       disableDefaultUI: true,
-      styles:[
+      styles: 
+      [
         {
           "featureType": "administrative",
           "elementType": "geometry",
@@ -81,7 +83,7 @@ export class HomePage implements OnInit {
             }
           ]
         }
-      ]
+      ] 
     });
     google.maps.event
     .addListenerOnce(this.mapRef, 'idle', () => {

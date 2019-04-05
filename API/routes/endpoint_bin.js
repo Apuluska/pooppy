@@ -8,7 +8,7 @@ function binRoutes(app) {
         res.send(bins);
     });
     
-    // Gets a bin by his Id
+    // Gets the info of one bin by his Id
     app.get("/bins/:id", async function (req, res) {
         let binId = req.params.id;
         const selectedBin = await BinProvider.findBinById(binId);
@@ -16,9 +16,9 @@ function binRoutes(app) {
     });
 
     // Finds a bin a change its state of bags
-    app.put("/bins/:id/:info", async function (req, res) {
-        let binId = req.params.id;
-        let binNewInfo = req.params.info;
+    app.put("/bins/bags", async function (req, res) {
+        let binId = req.body.id;
+        let binNewInfo = req.body.info;
         const selectedBin = await BinProvider.updateBin(binId, binNewInfo);
         res.send(selectedBin);
     }); 

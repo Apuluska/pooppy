@@ -23,12 +23,11 @@ export class LoginPage implements OnInit {
 newUser() {
   this.user.email = '';
   this.user.password = '';
-  this.user.username = '';
 
 }
 onSubmitLogin() {
   if (this.verNombre === true) {
-    this.authService.createUser(this.user.email, this.user.username, this.user.password);
+    this.authService.createUser(this.user.email, this.user.password);
   } else {
     this.authService.login(this.user.email, this.user.password);
   }

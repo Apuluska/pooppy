@@ -30,7 +30,8 @@ import {HttpClientModule} from '@angular/common/http';
     Geolocation,
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Geolocation,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

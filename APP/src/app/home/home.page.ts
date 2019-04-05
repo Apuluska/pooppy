@@ -7,6 +7,7 @@ declare var google;
 
 import { Bin } from '../bin';
 import { BinsService } from '../services/bins.service';
+import {SelectedBinComponent } from 'selected-bin/selected-bin.component'
 
 @Component({
   selector: 'app-home', 
@@ -102,8 +103,6 @@ export class HomePage implements OnInit {
     });
 
   }
- 
-
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
     return {

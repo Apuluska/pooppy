@@ -29,21 +29,57 @@ export class HomePage implements OnInit {
   ) {
 
   }
- 
+  
   ngOnInit() {
     this.loadMap();
     this.getBinData();
   }
 
   async loadMap() {
-    
+
     const loading = await this.loadingCtrl.create();
     loading.present();
     const myLatLng = await this.getLocation();
     const mapEle: HTMLElement = document.getElementById('map');
     this.mapRef = new google.maps.Map(mapEle, {
       center: myLatLng,
-      zoom: 12
+      zoom: 12,
+      styles:[
+        {
+          "featureType": "administrative",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "transit",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        }
+      ]
     });
     google.maps.event
     .addListenerOnce(this.mapRef, 'idle', () => {
@@ -66,10 +102,8 @@ export class HomePage implements OnInit {
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
     return {
-/*       lat: rta.coords.latitude,
-      lng: rta.coords.longitude */
-      lat: 40.41886,
-      lng: -3.7117,
+      lat: rta.coords.latitude,
+      lng: rta.coords.longitude 
     };
   }
 

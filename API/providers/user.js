@@ -55,20 +55,34 @@ class UserProvider {
   }
 
   async register(req, res) {
+    if(userExists(req.body.email)){
+      res.status(200).send({message: 'Usuario ya existe'})
+  }
     var saltRounds = 10;
     await bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
       const user = new userModel({
         email: req.body.email,
         password: hash
       });
+
       await user.save((err) => {
         if (err) res.status(500).send({
           message: `Error al crear usuario: $(err)`
         })
         res.status(200).send({ token: service.createToken(user) })
       });
+    
     });
-
   }
+
+  userExists(userEmail){
+    userModel.find({email: userEmail}, function(err, user){
+        if(user.length){
+            return true;
+        }else{
+            return false;
+        }
+    })
+}
 }
 module.exports = new UserProvider();

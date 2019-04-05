@@ -52,12 +52,13 @@ export class HomePage implements OnInit {
       position: { lat, lng },
       map: this.mapRef,
       title: 'Hello World!',
-      icon: './bin_point_true.svg'
+      icon: 'assets/img/bin_point_true.svg'
     });
     marker.addListener('click', function() {
       console.log(marker.title);
     });
   }
+  
 
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
@@ -73,12 +74,10 @@ export class HomePage implements OnInit {
 
 
 
-  getBinData(): void {
-    this.binsService.getBinData()
+  getBinData(): void {            this.binsService.getBinData()
       .subscribe(
         (bin_observable) => this.bin = bin_observable
       );
   }
-
 
 }

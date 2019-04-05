@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { Bin } from '../bin';
 import { UsersService } from '../services/users.service';
+import { BinsService } from '../services/bins.service';
 
 
 @Component({
@@ -12,26 +13,37 @@ import { UsersService } from '../services/users.service';
 })
 export class SelectedBinComponent implements OnInit {
 
-  constructor(private usersService: UsersService) { }
- 
-  ngOnInit() {}
-  public bin: Bin[];
-  public user: User[];
+  constructor(private usersService: UsersService, private binsService: BinsService) { }
 
-  getInfo
+  ngOnInit() { }
+  public bins: Bin[];
+  public users: User[];
 
-  addFavorite(userId: User["id"], binId: Bin["id"]): void {
-    // find({email: userEmail}){
-    //   if (!userId) { 
-    //     this.usersService.addFavorite(userId, binId)
-    //     .subscribe();
-    //   } else{
-    //     this.usersService.deleteFavoriteBin(userId, binId)
-    //     .subscribe();
-    //   }
-    // }
+  getOneBinInfo(binId): void {
+    this.binsService.getOneBinInfo(binId)
+    .subscribe(
+      (bin_observable) => this.bins = bin_observable
+    );
   }
 
-  
+  getOneUserInfo(binId): void {
+    this.usersService.getOneUserInfo(binId)
+    .subscribe(
+      (user_observable) => this.users = user_observable
+    );
+  }
+
+  addFavorite(userId: User["_id"], binId: Bin["_id"]): void {
+    const findBin = this.bins.find(bin => bin._id === binId)
+    if (!findBin) {
+      this.usersService.addFavoriteBin(userId, binId)
+        .subscribe();
+    } else {
+      this.usersService.deleteFavoriteBin(userId, binId)
+        .subscribe();
+    }
+  }
+
+
 
 }

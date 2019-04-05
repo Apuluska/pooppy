@@ -1,3 +1,19 @@
 .my-custom-menu {
     --width: 500px;
   }
+* {
+  --background: var(--blue);
+  font-family: var(--font);
+}
+.list-md {
+  background: var(--blue,var(--blue, --blue));
+}
+
+  .dogAvatar {
+  border-radius: 100%;
+  height: 10%;
+  margin-top: 15%;
+  margin-left: 7%;
+  border: 4px solid white;
+
+  }

@@ -12,14 +12,9 @@ export class MenuPage implements OnInit {
   selectedPath = '';
   public menuPages = [
     {
-      title: 'Home',
-      url: '/menu/home',
-      icon: 'home'
-    },
-    {
       title: 'Favoritos',
       url: '/menu/favorites',
-      icon: 'heart'
+      icon: '../assets/img/fakeDog.png'
     },
     {
       title: 'Ayuda',

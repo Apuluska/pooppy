@@ -2,10 +2,11 @@
   <ion-split-pane>
     <ion-menu>
       <ion-content>
+        <img class="dogAvatar" src="../assets/img/fakeDog.png">
         <ion-list>
           <ion-menu-toggle auto-hide="true" *ngFor="let p of menuPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <img class="menuIcon" slot="start" [name]="p.icon">
               <ion-label>
                 {{p.title}}
               </ion-label>

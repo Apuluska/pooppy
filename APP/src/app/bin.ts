@@ -1,5 +1,5 @@
 export class Bin {
-    id: string;
+    _id: string;
     bag: boolean;
     address: [
         {

@@ -44,6 +44,7 @@ export class HomePage implements OnInit {
     this.mapRef = new google.maps.Map(mapEle, {
       center: myLatLng,
       zoom: 12,
+      disableDefaultUI: true,
       styles:[
         {
           "featureType": "administrative",
@@ -90,12 +91,16 @@ export class HomePage implements OnInit {
   }
 
   private addMaker(lat: number, lng: number) {
-    new google.maps.Marker({
+      const marker= new google.maps.Marker({
       position: { lat, lng },
       map: this.mapRef,
       title: 'Hello World!',
       icon:'assets/img/bin_point_true.svg',
     }); 
+    marker.addListener('click', function() {
+      this.getBinInfo(marker.title)
+    });
+
   }
  
 
@@ -113,28 +118,27 @@ export class HomePage implements OnInit {
       .subscribe(
       (bin_observable) => {
        // bin_observable.length
+        let iconBin;
         for(let i = 0; i <10;i++){
           let lat = parseFloat(bin_observable[i].address[0].lat);
           let lng = parseFloat(bin_observable[i].address[0].lng);
           let statusBin= bin_observable[i].bag;
           if (statusBin===true){
-            new google.maps.Marker({
+           iconBin= 'assets/img/bin_point_true.svg'}
+           else{
+               iconBin= 'assets/img/bin_point_false.svg'
+           }
+         const marker=  new google.maps.Marker({
             position: { lat, lng },
-              map: this.mapRef,
-              title: bin_observable[i].address[0].addressName,
-              icon:'assets/img/bin_point_true.svg'
-            });
-          }
-          else{
-          new google.maps.Marker({
-          position: { lat, lng },
             map: this.mapRef,
-            title: bin_observable[i].address[0].addressName,
-            icon:'assets/img/bin_point_false.svg'
+            title: bin_observable[i]._id,
+            icon: iconBin
+          });
+          marker.addListener('click', function() {
+            this.getBinInfo(marker.title)
           });
         } 
-        }
-        
+    
       });
   }
 }

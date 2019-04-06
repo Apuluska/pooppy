@@ -4,16 +4,38 @@
 * {
   --background: var(--blue);
   font-family: var(--font);
+  --border-style: none;
 }
 .list-md {
+  margin-top: 15%;
   background: var(--blue,var(--blue, --blue));
 }
-
-  .dogAvatar {
+.menuIcon {
+  margin-top: 15%;
+  height: 25px;
+}
+.titlePages {
+  font-family: 'Raleway', sans-serif;
+  color: white;
+}
+.dogAvatar {
   border-radius: 100%;
   height: 10%;
   margin-top: 15%;
   margin-left: 7%;
   border: 4px solid white;
-
   }
+
+.logOutIcon {
+  margin-top: 65%;
+  margin-left: 8%;
+  height: 25px;
+}
+a {
+  margin-left: 8%;
+  font-family: 'Raleway', sans-serif, white;
+  color: white;
+  font-family: var(--font);
+  }
+  
+

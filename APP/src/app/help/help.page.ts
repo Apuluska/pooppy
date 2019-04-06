@@ -8,26 +8,18 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./help.page.scss'],
 })
 export class HelpPage implements OnInit {
-  selectedPath = '';
-  public pages = [ ];
+  showButton = false;
+  showText = false;
 
-  constructor(private menu:
-    MenuController) {
+  constructor() {
   }
 
   ngOnInit() {
   }
-  openFirst() {
-    this.menu.enable(true, 'first');
-    this.menu.open('first');
+  showMeTheP() {
+    this.showText = !this.showText;
   }
-
-  openEnd() {
-    this.menu.open('end');
-  }
-
-  openCustom() {
-    this.menu.enable(true, 'custom');
-    this.menu.open('custom');
+  showMeTheText() {
+    this.showButton = !this.showButton;
   }
 }

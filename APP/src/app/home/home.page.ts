@@ -120,7 +120,7 @@ export class HomePage implements OnInit {
       (bin_observable) => {
        // bin_observable.length
         let iconBin;
-        for(let i = 0; i <10;i++){
+        for(let i = 0; i < 20;i++){
           let lat = parseFloat(bin_observable[i].address[0].lat);
           let lng = parseFloat(bin_observable[i].address[0].lng);
           let statusBin= bin_observable[i].bag;

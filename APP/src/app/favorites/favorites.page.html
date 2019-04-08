@@ -12,6 +12,21 @@
         <!-- the main content -->
         <ion-router-outlet id="menu-content"></ion-router-outlet>
       </ion-split-pane>
+      <ion-content>
+
+        
+        <ul>
+          <li *ngFor="let bin of bins">
+            <div>{{bin.address[0].addressName}}</div>
+            <ion-checkbox></ion-checkbox>
+          </li>
+        </ul>
+      </ion-content>
+
+      <ion-item #item>
+        <ion-button (click)="removerProducto(item)">Eliminar Productos</ion-button>
+        <ion-button (click)="marcarTodos()">Marcar todos</ion-button>
+      </ion-item>
   <!-- <ion-list>
     <ion-item *ngFor="let item of items">
       <ion-icon [name]="item.icon" slot="start"></ion-icon>

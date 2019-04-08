@@ -10,16 +10,16 @@ function userRoutes(app) {
     });
 
     // Add the selected bin into the favorite bin list
-    app.post("/user/:id_user/favorite_bins", async function (req, res) {
-        let userId = req.params.id_user;
-        let binId = req.body.id_bin;
-        const user = await UserProvider.addFavoriteBin(userId, binId);
+    app.post("/user/favoritebins/add", async function (req, res) {
+        let id_user = req.body.id_user;
+        let id_bin = req.body.id_bin;
+        const user = await UserProvider.addFavoriteBin(id_user, id_bin);
         res.send(user);
     });
 
     // Remove the selected bin in the user favorite bin list
-    app.put("/user/:id_user/favorite_bins/", async function (req, res) {
-        let userId = req.params.id_user;
+    app.put("/user/favoritebins/update", async function (req, res) {
+        let userId = req.body.id_user;
         let binId = req.body.id_bin;
         const user = await UserProvider.deleteFavoriteBin(userId, binId);
         res.send(user);

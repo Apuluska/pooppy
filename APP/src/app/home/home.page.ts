@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
+import {Location} from '@angular/common';
+
 
 declare var google;
 
@@ -15,7 +17,8 @@ export class HomePage implements OnInit {
 
   constructor(
     private geolocation: Geolocation,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private location: Location
   ) {
 
   }
@@ -55,5 +58,7 @@ export class HomePage implements OnInit {
       lng: rta.coords.longitude
     };
   }
-
+  backClicked() {
+    this.location.back();
+  }
 }

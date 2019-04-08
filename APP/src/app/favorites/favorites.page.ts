@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-favorites',
@@ -6,12 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favorites.page.scss']
 })
 export class FavoritesPage implements OnInit {
-  constructor() {}
+  constructor(private location: Location) {}
 
   ngOnInit() {
   }
-  // add back when alpha.4 is out
-  // navigate(item) {
-  //   this.router.navigate(['/list', JSON.stringify(item)]);
-  // }
+  backClicked() {
+    this.location.back();
+  }
 }

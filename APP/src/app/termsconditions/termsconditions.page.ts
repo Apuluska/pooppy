@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-termsconditions',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsConditionsPage implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
   }
-
+  backClicked() {
+    this.location.back();
+  }
 }

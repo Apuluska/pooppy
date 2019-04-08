@@ -20,14 +20,14 @@ export class MenuPage implements OnInit {
     {
       title: 'Ayuda',
       url: '/menu/help',
-      icon: 'md-help-circle',
-      src: '../assets/icon/helpicon.svg'
+      icon: 'helpicon.png',
+      src: '../assets/icon/helpicon.png'
     },
     {
       title: 'Acerca de',
       url: '/menu/about',
-      icon: 'md-information-circle',
-      src: '../assets/icon/infoicon.svg'
+      icon: 'infoicon.png',
+      src: '/../assets/icon/infoicon.png'
     },
   ];
 

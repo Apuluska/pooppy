@@ -1,12 +1,15 @@
 <ion-header>
   <ion-toolbar class="title">
-    <ion-back-button [icon]="buttonIcon">
-    </ion-back-button>
-    <ion-title>Ayuda</ion-title>
+      <ion-buttons slot="start">
+        <button class="backArrow" (click)="backClicked()">  
+        <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Ayuda</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
 
+<ion-content>
   <button class="frecuencyQuestions" (click)="showMeTheText()">Preguntas
     frecuentes</button>
   <div *ngIf="showButton === true">

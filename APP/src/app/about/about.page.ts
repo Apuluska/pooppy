@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
-
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class AboutPage implements OnInit {
 
-  constructor(private menu: MenuController) { }
+  constructor(private menu: MenuController, private location: Location) { }
 
   ngOnInit() {
   }
@@ -26,5 +26,8 @@ export class AboutPage implements OnInit {
   openCustom() {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
+  }
+  backClicked() {
+    this.location.back();
   }
 }

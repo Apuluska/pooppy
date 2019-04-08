@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input  } from '@angular/core';
 
 import { User } from '../user';
 import { Bin } from '../bin';
@@ -15,33 +15,35 @@ export class SelectedBinComponent implements OnInit {
 
   constructor(private usersService: UsersService, private binsService: BinsService) { }
 
-  ngOnInit() { }
-  public bins: Bin[];
+  ngOnInit() {
+  }
+
+  public bin: Bin[];
   public users: User[];
+  public userId = '5ca1fdf203f2ef6b8024750b';
 
-  getOneBinInfo(binId): void {
-    this.binsService.getOneBinInfo(binId)
-    .subscribe(
-      (bin_observable) => this.bins = bin_observable
-    );
-  }
+  @Input() public thisBinId : string;
 
-  getOneUserInfo(binId): void {
-    this.usersService.getOneUserInfo(binId)
-    .subscribe(
-      (user_observable) => this.users = user_observable
-    );
-  }
+  // getOneBinInfo(thisBinId): void {
+  //   this.binsService.getOneBinInfo(thisBinId)
+  //   .subscribe(
+  //     (bin_observable) => this.bin = bin_observable
+  //     );
+  // }
 
-  addFavorite(userId: User["_id"], binId: Bin["_id"]): void {
-    const findBin = this.bins.find(bin => bin._id === binId)
-    if (!findBin) {
-      this.usersService.addFavoriteBin(userId, binId)
-        .subscribe();
-    } else {
-      this.usersService.deleteFavoriteBin(userId, binId)
-        .subscribe();
-    }
+  //Gets userId from the atribute of this class
+  //Gets thisBinId from home.page.ts
+  addFavorite(userId: User["_id"], thisBinId: Bin["_id"]): void {
+    console.log(thisBinId);
+    // const userBinFavoriteList = getUserFavoriteBinList('5ca1fdf203f2ef6b8024750b');
+    // const findBin = userBinFavoriteList.find(bin => bin._id === thisBinId)
+    // if (!findBin) {
+    //   this.usersService.addFavoriteBin(userId, thisBinId)
+    //     .subscribe();
+    // } else {
+    //   this.usersService.deleteFavoriteBin(userId, thisBinId)
+    //     .subscribe();
+    // }
   }
 
 

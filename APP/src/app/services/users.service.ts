@@ -28,8 +28,8 @@ export class UsersService {
     return this.http.put<User["_id"]>(`${this.userUrl}/favoritebins/update`, {id_user, id_bin}, this.httpOptions)
   }
 
-  getOneUserInfo(id_user:  User["_id"]): Observable<Array<User>> {
-    return this.http.get<User[]>(`${this.userUrl}/?id=${id_user}`)
+  getUserFavoriteBinList(id_user: User["_id"]): Observable<Array<User>> {
+    return this.http.get<User[]>(this.userUrl + '/' + id_user + '/favoritebins')
   }
 
 }

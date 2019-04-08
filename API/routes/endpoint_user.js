@@ -3,7 +3,7 @@ const { UserProvider } = require("../providers");
 function userRoutes(app) {
 
     // Gets all the info of the favorite bins that a user has 
-    app.get("/user/:id/favorite_bins", async function (req, res) {
+    app.get("/user/:id/favoritebins", async function (req, res) {
         let userId = req.params.id;
         const favoriteBins = await UserProvider.getFavoriteBinList(userId);
         res.send(favoriteBins);

@@ -1,7 +1,2 @@
 <div id="map"></div>
-<app-selected-bin></app-selected-bin>
-<ion-content padding>
-  This is the latitude: {{latitude}} <br>
-  This is the longitude: {{longitude}} <br>
-  <button ion-button (click)="getLocation()">TEST LOCATION</button>
-</ion-content>
+<app-selected-bin [thisBinId]= "thisBinId"></app-selected-bin>

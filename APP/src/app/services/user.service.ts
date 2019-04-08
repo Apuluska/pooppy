@@ -29,5 +29,4 @@ export class UserService {
     return this.http.put<Bin["_id"]>(`${this.urlBase}user/favoritebins/update`, {id_user, id_bin}, this.httpOptions)
    
   }
-
 }

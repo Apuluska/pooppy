@@ -21,6 +21,7 @@ export class FavoritesPage implements OnInit {
  
 //userId es el id del usuario logueado, hay que ver de donde lo saca el front
   //getFavoriteBinData(userId: string): any { //Esta es la linea que deberia quedar, debe recibir el userid por parametro
+  //this.bins = [];
   getFavoriteBinData(): any {
     console.log("vamoalyeu");
     let userId = "5c9b28545f02671f443fb996";
@@ -28,6 +29,7 @@ export class FavoritesPage implements OnInit {
       .subscribe(
       (bin_observable) => {
        // bin_observable.length
+       this.bins = [];
         for(let i = 0; i < bin_observable.length;i++){
           console.log("a pushear " + bin_observable[i].address[0].addressName);
           this.bins.push(bin_observable[i]);
@@ -42,6 +44,8 @@ export class FavoritesPage implements OnInit {
     console.log(binId)
     /* let binId= "5c9a8a8b318e3d3e6094df08"; */
     this.usersService.deleteBin(userId,binId).
-    subscribe();
+    subscribe(
+      this.getFavoriteBinData()
+    );
   }
 }

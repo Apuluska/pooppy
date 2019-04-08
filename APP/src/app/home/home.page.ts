@@ -95,9 +95,6 @@ export class HomePage implements OnInit {
       title: 'Hello World!',
       icon:'assets/img/bin_point_true.svg',
     }); 
-    marker.addListener('click', ()=> {
-      this.thisBinId = marker.title;
-    });
 
   }
 
@@ -137,8 +134,8 @@ export class HomePage implements OnInit {
             title: bin_observable[i]._id,
             icon: iconBin
           });
-          marker.addListener('click', function() {
-            this.getOneBinInfo(marker.title)
+          marker.addListener('click', ()=> {
+            this.thisBinId = marker.title;
           });
         } 
     

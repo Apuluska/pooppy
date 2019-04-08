@@ -24,12 +24,13 @@ export class UsersService {
     return this.http.post<User["_id"]>(`${this.userUrl}/favoritebins/add`, {id_user, id_bin}, this.httpOptions)
   }
 
-  deleteFavoriteBin (id_user: User["_id"], id_bin: Bin["_id"]): Observable<string> {
-    return this.http.put<User["_id"]>(`${this.userUrl}/favoritebins/update`, {id_user, id_bin}, this.httpOptions)
+  getUserFavoriteBinsData(userId: string): Observable<Array<Bin>> {
+    let endpointUrl = this.userUrl + '/' + userId + '/favoritebins';
+    return this.http.get<Bin[]>(endpointUrl);
   }
 
-  getUserFavoriteBinList(id_user: User["_id"]): Observable<Array<User>> {
-    return this.http.get<User[]>(this.userUrl + '/' + id_user + '/favoritebins')
+  deleteBin( userId: string, idBin:string) : Observable<string> {
+    return this.http.put<Bin["_id"]>(`${this.userUrl}/favoritebins/update`, {userId, idBin}, this.httpOptions)
   }
 
 }

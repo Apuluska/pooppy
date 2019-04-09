@@ -2,17 +2,13 @@ import { Component, OnInit} from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
 import {Location} from '@angular/common';
-
-
-
-
-declare var google;
-
-
 import { Bin } from '../bin';
 import { BinsService } from '../services/bins.service';
 import { SelectedBinComponent } from '../selected-bin/selected-bin.component';
 
+/* import {SelectedBinComponent } from 'selected-bin/selected-bin.component' */
+
+declare var google;
 
 @Component({
   selector: 'app-home',
@@ -20,6 +16,17 @@ import { SelectedBinComponent } from '../selected-bin/selected-bin.component';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+
+  constructor(
+    private geolocation: Geolocation,
+    private loadingCtrl: LoadingController,
+    private binsService: BinsService,
+    private thisBinId: SelectedBinComponent,
+
+  ) {
+
+  }
+  mapRef = null;
   selectedPath = '';
   public menuPages = [
     {
@@ -42,23 +49,14 @@ export class HomePage implements OnInit {
     },
   ];
 
-  mapRef = null;
-
-  constructor(
-    private geolocation: Geolocation,
-    private loadingCtrl: LoadingController,
-    private binsService: BinsService,
-    private location: Location,
-    private thisBinId: SelectedBinComponent
-  ) {
-
-  }
+  latitude: number;
+  longitude: number;
+  public bin: Bin[];
 
   ngOnInit() {
     this.loadMap();
     this.getBinData();
   }
-
   async loadMap() {
     const loading = await this.loadingCtrl.create();
     loading.present();
@@ -68,43 +66,43 @@ export class HomePage implements OnInit {
       center: myLatLng,
       zoom: 12,
       disableDefaultUI: true,
-      styles: 
+      styles:
       [
         {
-          "featureType": "administrative",
-          "elementType": "geometry",
-          "stylers": [
+          'featureType': 'administrative',
+          'elementType': 'geometry',
+          'stylers': [
             {
-              "visibility": "off"
+              'visibility': 'off'
             }
           ]
         },
         {
-          "featureType": "poi",
-          "stylers": [
+          'featureType': 'poi',
+          'stylers': [
             {
-              "visibility": "off"
+              'visibility': 'off'
             }
           ]
         },
         {
-          "featureType": "road",
-          "elementType": "labels.icon",
-          "stylers": [
+          'featureType': 'road',
+          'elementType': 'labels.icon',
+          'stylers': [
             {
-              "visibility": "off"
+              'visibility': 'off'
             }
           ]
         },
         {
-          "featureType": "transit",
-          "stylers": [
+          'featureType': 'transit',
+          'stylers': [
             {
-              "visibility": "off"
+              'visibility': 'off'
             }
           ]
         }
-      ] 
+      ]
     });
     google.maps.event
     .addListenerOnce(this.mapRef, 'idle', () => {
@@ -112,14 +110,14 @@ export class HomePage implements OnInit {
       this.addMaker(myLatLng.lat, myLatLng.lng);
     });
   }
-  
+
   private addMaker(lat: number, lng: number) {
-      const marker= new google.maps.Marker({
+      const marker = new google.maps.Marker({
       position: { lat, lng },
       map: this.mapRef,
       title: 'Hello World!',
-      icon:'assets/img/bin_point_true.svg',
-    }); 
+      icon: 'assets/img/bin_point_true.svg',
+    });
 
   }
 
@@ -132,39 +130,34 @@ export class HomePage implements OnInit {
       lng: rta.coords.longitude
     };
   }
-}
-
-  latitude: number;
-  longitude: number;
-  public bin: Bin[];
 
 
 
-  getBinData(): void {            this.binsService.getBinData()
+  getBinData(): void {
+    this.binsService.getBinData()
       .subscribe(
       (bin_observable) => {
        // bin_observable.length
         let iconBin;
-        for(let i = 0; i < 20;i++){
-          let lat = parseFloat(bin_observable[i].address[0].lat);
-          let lng = parseFloat(bin_observable[i].address[0].lng);
-          let statusBin= bin_observable[i].bag;
-          if (statusBin===true){
-           iconBin= 'assets/img/bin_point_true.svg'}
-           else{
-               iconBin= 'assets/img/bin_point_false.svg'
+        for (let i = 0; i < 20; i++) {
+          const lat = parseFloat(bin_observable[i].address[0].lat);
+          const lng = parseFloat(bin_observable[i].address[0].lng);
+          const statusBin = bin_observable[i].bag;
+          if (statusBin === true) {
+           iconBin = 'assets/img/bin_point_true.svg'; } else {
+               iconBin = 'assets/img/bin_point_false.svg';
            }
-         const marker=  new google.maps.Marker({
+         const marker =  new google.maps.Marker({
             position: { lat, lng },
             map: this.mapRef,
             title: bin_observable[i]._id,
             icon: iconBin
           });
-          marker.addListener('click', ()=> {
+          marker.addListener('click', () => {
             this.thisBinId = marker.title;
           });
-        } 
-    
+        }
+
       });
   }
 

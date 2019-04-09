@@ -27,9 +27,9 @@ import { FormsModule } from '@angular/forms';
     MatCheckboxModule,
     MatMenuModule,
     HttpClientModule,
-    FormsModule      
+    FormsModule
   ],
-  
+
   providers: [
     Geolocation,
     StatusBar,

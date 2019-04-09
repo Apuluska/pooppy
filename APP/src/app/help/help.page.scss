@@ -2,6 +2,11 @@
   text-decoration: none;
   font-family: 'Raleway', sans-serif, bold;
   font-weight: bold;
+  .question {
+    font-size: 100%;
+    text-align: center;
+    color: #70CCC6;
+}
 }
 .title {
   --background: #70CCC6;
@@ -30,6 +35,8 @@ p {
   text-align: justify;
   margin-left: 5%;
   margin-right: 5%;
+  font-weight: normal;
+
 }
 button {
   width: 80%;

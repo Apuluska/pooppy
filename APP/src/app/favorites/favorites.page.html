@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="title">
     <ion-buttons slot="start">
-      <button class="backArrow" (click)="backClicked()">  
+      <button class="backArrow" (click)="backClicked()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
@@ -9,3 +9,14 @@
   </ion-toolbar>
 </ion-header>
 <ion-content></ion-content>
+<ion-split-pane contentId="menu-content">
+  <ion-router-outlet id="menu-content"></ion-router-outlet>
+</ion-split-pane>
+<ion-content>
+  <ul>
+    <li *ngFor="let bin of bins">
+      <div>{{bin.address[0].addressName}}</div>
+      <ion-button (click)="deleteBin(bin._id)">Delete</ion-button>
+    </li>
+  </ul>
+</ion-content>

@@ -38,11 +38,9 @@ export class FavoritesPage implements OnInit {
     
       });
   }
-
   public deleteBin(binId):void {
     let userId = "5c9b28545f02671f443fb996";
     console.log(binId)
-    /* let binId= "5c9a8a8b318e3d3e6094df08"; */
     this.usersService.deleteBin(userId,binId).
     subscribe(
       this.getFavoriteBinData()

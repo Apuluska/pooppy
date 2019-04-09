@@ -1,43 +1,21 @@
-
-    <ion-split-pane contentId="menu-content">
-        <!--  our side menu  -->
-        <ion-menu contentId="menu-content">
-          <ion-header>
-            <ion-toolbar>
-              <ion-title>Menu</ion-title>
-            </ion-toolbar>
-          </ion-header>
-        </ion-menu>
-      
-        <!-- the main content -->
-        <ion-router-outlet id="menu-content"></ion-router-outlet>
-      </ion-split-pane>
-      <ion-content>
-
-        
-        <ul>
-          <li *ngFor="let bin of bins">
-            <div>{{bin.address[0].addressName}}</div>
-            <ion-button (click)="deleteBin(bin._id)">Delete</ion-button>
-          </li>
-        </ul>
-      </ion-content>
-
-    <!--   <ion-item #item>
-        <ion-button (click)="removerProducto(item)">Eliminar Productos</ion-button>
-        <ion-button (click)="marcarTodos()">Marcar todos</ion-button>
-      </ion-item> -->
-  <!-- <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
-    </ion-item>
-  </ion-list> -->
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
+<ion-split-pane contentId="menu-content">
+    <!--  our side menu  -->
+    <ion-menu contentId="menu-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+    </ion-menu>
+  
+    <!-- the main content -->
+    <ion-router-outlet id="menu-content"></ion-router-outlet>
+  </ion-split-pane>
+  <ion-content>
+    <ul>
+      <li *ngFor="let bin of bins">
+        <div>{{bin.address[0].addressName}}</div>
+        <ion-button (click)="deleteBin(bin._id)">Delete</ion-button>
+      </li>
+    </ul>
+  </ion-content>

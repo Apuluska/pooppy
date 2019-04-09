@@ -31,6 +31,6 @@ export class UsersService {
 
   deleteBin( id_user: string, id_bin:string) : Observable<string> {
     return this.http.put<Bin["_id"]>(`${this.userUrl}/favoritebins/update`, {id_user, id_bin}, this.httpOptions)
+   
   }
-
 }

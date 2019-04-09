@@ -1,19 +1,2 @@
-
-  <div id="map"></div>
-<div class="favorite-tab">
-  <div>
-      <!--<li class="listaaaaaa" *ngFor="let info of bin">
-          <span>{{info.address[0].lat | json}}</span>
-        </li>-->
-    <p>Esta es la calle</p>
-  </div>
-  <div class="buttons">
-    <button class="bags"></button>
-    <button class="favorite" (click)="addfavorite()"></button>
-  </div>
-</div>
-<ion-content padding>
-  This is the latitude: {{latitude}} <br>
-  This is the longitude: {{longitude}} <br>
-  <button ion-button (click)="getLocation()">TEST LOCATION</button>
-</ion-content>
+<div id="map"></div>
+<app-selected-bin [selectedBinId]= "thisBinId"></app-selected-bin>

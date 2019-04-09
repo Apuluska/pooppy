@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Bin } from '../bin';
-import { UserService } from '../services/user.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-favorites',
@@ -10,7 +10,7 @@ import { UserService } from '../services/user.service';
 })
 export class FavoritesPage implements OnInit {
   constructor(
-    private usersService: UserService,
+    private usersService: UsersService,
     ) {}
 
   ngOnInit() {

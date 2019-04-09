@@ -4,6 +4,7 @@ import { LoadingController } from '@ionic/angular';
 import {Location} from '@angular/common';
 
 
+
 declare var google;
 
 @Component({
@@ -12,13 +13,34 @@ declare var google;
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  selectedPath = '';
+  public menuPages = [
+    {
+      title: 'Favoritos',
+      url: '/menu/favorites',
+      icon: 'md-staricon',
+      src: '../assets/icon/md-staricon.svg'
+    },
+    {
+      title: 'Ayuda',
+      url: '/menu/help',
+      icon: 'helpicon.png',
+      src: '../assets/icon/helpicon.png'
+    },
+    {
+      title: 'Acerca de',
+      url: '/menu/about',
+      icon: 'infoicon.png',
+      src: '/../assets/icon/infoicon.png'
+    },
+  ];
 
   mapRef = null;
 
   constructor(
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
-    private location: Location
+    private location: Location,
   ) {
 
   }
@@ -58,7 +80,5 @@ export class HomePage implements OnInit {
       lng: rta.coords.longitude
     };
   }
-  backClicked() {
-    this.location.back();
-  }
 }
+

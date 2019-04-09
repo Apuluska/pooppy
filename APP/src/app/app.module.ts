@@ -14,6 +14,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { SelectedBinComponent } from './selected-bin/selected-bin.component';
 
+
 import { FormsModule } from '@angular/forms';
 
 @NgModule({

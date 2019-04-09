@@ -1,6 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
+import {Location} from '@angular/common';
+
 
 
 declare var google;
@@ -12,7 +14,7 @@ import { SelectedBinComponent } from '../selected-bin/selected-bin.component';
 
 
 @Component({
-  selector: 'app-home', 
+  selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
@@ -114,7 +116,8 @@ export class HomePage implements OnInit {
 
 
 
-  getBinData(): void {            this.binsService.getBinData()
+  getBinData(): void {           
+     this.binsService.getBinData()
       .subscribe(
       (bin_observable) => {
        // bin_observable.length

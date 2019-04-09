@@ -1,0 +1,25 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-content>
+        <img class="dogAvatar" src="../assets/img/fakeDog.png">
+        <ion-list>
+          <ion-menu-toggle class="titlePages" auto-hide="true" *ngFor="let p of menuPages">
+            <ion-item class="titlePages" [routerDirection]="'root'" [routerLink]="[p.url]">
+              <img class="menuIcon" slot="start" [src]="p.src">
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+        <div class="logOut">
+          <a href="/login">
+          <img class="logOutIcon" src="../assets/icon/out_session.svg">
+          Cerrar sesión</a>
+        </div>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

@@ -1,2 +1,15 @@
+<ion-content padding>
 <div id="map"></div>
+</ion-content>
 <app-selected-bin [selectedBinId]= "thisBinId"></app-selected-bin>
+
+<ion-header>
+  <ion-toolbar class="title">
+      <ion-buttons slot="start">
+          <button class="backArrow" (click)="backClicked()">  
+          <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title>Pooppy</ion-title>
+  </ion-toolbar>
+</ion-header>

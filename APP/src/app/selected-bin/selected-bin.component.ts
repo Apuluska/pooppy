@@ -57,6 +57,15 @@ export class SelectedBinComponent implements OnInit {
     }
   }
 
+/* bagsTrueAndFalse(selectedBin: Bin["_id"]): void{
+
+  if(bag=== true){
+    bag=false
+  }else{
+    bag=true
+  } 
+} */
+
 
 
 }

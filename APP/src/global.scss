@@ -10,8 +10,47 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700');
-
-body{
-    font-family: var(--font);
+* {
+    text-decoration: none;
 }
+.title {
+    --background: #70CCC6;
+    font-family: 'Raleway', sans-serif, bold;
+    font-weight: bold;
+    color: white;
+}
+
+a .p {
+    width: 400px;
+    height: 5%;
+    font-family: 'Raleway', sans-serif, bold;
+    font-weight: bold;
+    color: black;
+    font-size: 100%;
+    padding-left: 40px;
+    margin-top: 10%;
+    position: relative;
+    .arrow {
+        position: absolute;
+        align-content:flex-end;
+        bottom: 3%;
+        right: 15%;
+    }
+}
+button {
+    width: 80%;
+    height: 40px;
+    background: #70CCC6;
+    border-radius: 8px;
+    font-family: 'Raleway', sans-serif, bold;
+    font-weight: bold;
+    color: white;
+    font-size: 90%;
+    margin-top: 10%;
+    margin-left: 10%;
+    box-shadow: 5px 5px #D8D8D8;
+  }
+  .backArrow {
+    box-shadow: 5px 5px #70CCC6;
+  }
+ 

@@ -19,9 +19,12 @@ function userRoutes(app) {
 
     // Remove the selected bin in the user favorite bin list
     app.put("/user/favoritebins/update", async function (req, res) {
-        let userId = req.body.id_user;
-        let binId = req.body.id_bin;
-        const user = await UserProvider.deleteFavoriteBin(userId, binId);
+        let id_user = req.body.id_user;
+        let id_bin = req.body.id_bin;
+        console.log(id_user);
+        console.log(id_bin);
+        const user = await UserProvider.deleteFavoriteBin(id_user, id_bin);
+   
         res.send(user);
     });
 

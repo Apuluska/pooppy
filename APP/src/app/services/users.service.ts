@@ -29,8 +29,8 @@ export class UsersService {
     return this.http.get<Bin[]>(endpointUrl);
   }
 
-  deleteBin( userId: string, idBin:string) : Observable<string> {
-    return this.http.put<Bin["_id"]>(`${this.userUrl}/favoritebins/update`, {userId, idBin}, this.httpOptions)
+  deleteBin( id_user: string, id_bin:string) : Observable<string> {
+    return this.http.put<Bin["_id"]>(`${this.userUrl}/favoritebins/update`, {id_user, id_bin}, this.httpOptions)
   }
 
 }

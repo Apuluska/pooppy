@@ -24,15 +24,18 @@ export class HomePage implements OnInit {
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
     private binsService: BinsService,
-    private thisBinId: SelectedBinComponent
+    private selectedBin: SelectedBinComponent 
   ) {
 
   }
+
+  public selectedBinId: string;
 
   ngOnInit() {
     this.loadMap();
     this.getBinData();
   }
+
 
   async loadMap() {
     const loading = await this.loadingCtrl.create();
@@ -88,7 +91,7 @@ export class HomePage implements OnInit {
     });
   }
   
-  private addMaker(lat: number, lng: number) {
+  public addMaker(lat: number, lng: number) {
       const marker= new google.maps.Marker({
       position: { lat, lng },
       map: this.mapRef,
@@ -114,7 +117,7 @@ export class HomePage implements OnInit {
 
 
 
-  getBinData(): void {            this.binsService.getBinData()
+  getBinData(): void { this.binsService.getBinData()
       .subscribe(
       (bin_observable) => {
        // bin_observable.length
@@ -135,7 +138,8 @@ export class HomePage implements OnInit {
             icon: iconBin
           });
           marker.addListener('click', ()=> {
-            this.thisBinId = marker.title;
+            this.selectedBinId = marker.title;
+            this.selectedBin.getOneBinInfo(marker.title);
           });
         } 
     

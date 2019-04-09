@@ -18,15 +18,15 @@
         <ul>
           <li *ngFor="let bin of bins">
             <div>{{bin.address[0].addressName}}</div>
-            <ion-checkbox></ion-checkbox>
+            <ion-button (click)="deleteBin(bin._id)">Delete</ion-button>
           </li>
         </ul>
       </ion-content>
 
-      <ion-item #item>
+    <!--   <ion-item #item>
         <ion-button (click)="removerProducto(item)">Eliminar Productos</ion-button>
         <ion-button (click)="marcarTodos()">Marcar todos</ion-button>
-      </ion-item>
+      </ion-item> -->
   <!-- <ion-list>
     <ion-item *ngFor="let item of items">
       <ion-icon [name]="item.icon" slot="start"></ion-icon>

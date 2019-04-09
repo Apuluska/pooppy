@@ -21,7 +21,8 @@ export class BinsService {
   }
 
   getOneBinInfo(binId: string): Observable<Array<Bin>> {
-    return this.http.get<Bin[]>(`${this.binUrl}/?id=${binId}`)
+    // return this.http.get<Bin[]>(`${this.binUrl}/?id=${binId}`)
+    return this.http.get<Bin[]>(this.binUrl + '/' + binId)
   }
  
   

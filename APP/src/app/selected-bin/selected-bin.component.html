@@ -1,6 +1,6 @@
 <div class="favorite-tab">
-  <div>
-    <p>{{binInfo.address[0].addressName}}</p>
+  <div *ngIf="binInfo">
+    <p>{{binInfo.address[0].addressNam}}</p>
   </div>
   <div class="buttons">
     <button class="bags"></button>

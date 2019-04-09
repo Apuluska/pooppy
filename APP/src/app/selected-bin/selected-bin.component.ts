@@ -21,7 +21,6 @@ export class SelectedBinComponent implements OnInit {
     ) { }
   
   @Input() public selectedBinId : string;
-  @Input() public addMarker;
 
   public favoriteBins: Bin[];
   public binInfo: Bin[];
@@ -35,8 +34,11 @@ export class SelectedBinComponent implements OnInit {
   getOneBinInfo(selectedBinId: Bin["_id"]): any {
     this.binsService.getOneBinInfo(selectedBinId)
     .subscribe(
-      (bin_observable) => {this.binInfo = bin_observable; console.log(this.binInfo)}
+      (bin_observable) => {this.binInfo = bin_observable;
+        console.log(this.binInfo)
+      }
       );
+      
   }
 
   getUserFavoriteBinsData(userId): any {

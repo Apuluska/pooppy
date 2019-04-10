@@ -21,7 +21,13 @@ export class BinsService {
   }
 
   getOneBinInfo(binId: string): Observable<Array<Bin>> {
-    return this.http.get<Bin[]>(`${this.binUrl}/?id=${binId}`);
+    // return this.http.get<Bin[]>(`${this.binUrl}/?id=${binId}`)
+    return this.http.get<Bin[]>(this.binUrl + '/' + binId)
   }
-
+ 
+  updateBinBags(binId: string, hasBags: boolean):  Observable<Bin> {
+    // return this.http.get<Bin[]>(`${this.binUrl}/?id=${binId}`)
+    return this.http.post<Bin>(this.binUrl + '/bins/bags', {"id": binId, "info": hasBags.toString()})
+  }
+  
 }

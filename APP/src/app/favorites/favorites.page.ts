@@ -29,22 +29,23 @@ export class FavoritesPage implements OnInit {
     // getFavoriteBinData(userId: string): any { //Esta es la linea que deberia quedar, debe recibir el userid por parametro
     // this.bins = [];
     getFavoriteBinData(): any {
-      console.log('vamoalyeu');
-      const userId = '5c9b28545f02671f443fb996';
+
+      let userId = "5ca1fdf203f2ef6b8024750b";
       this.usersService.getUserFavoriteBinsData(userId)
         .subscribe(
         (bin_observable) => {
-         this.bins = [];
-          for (let i = 0; i < bin_observable.length; i++) {
+          this.bins = [];
+          console.log(this.bins)
+          for(let i = 0; i < bin_observable.length;i++){
             this.bins.push(bin_observable[i]);
-          }
+          } 
+         
         });
     }
-
-    public deleteBin(binId): void {
-      const userId = '5c9b28545f02671f443fb996';
-      console.log('estoy eliminando');
-      this.usersService.deleteBin(userId, binId).
+  
+    public deleteBin(binId):void {
+      let userId = "5c9b28545f02671f443fb996";
+      this.usersService.deleteBin(userId,binId).
       subscribe(
         this.getFavoriteBinData()
       );

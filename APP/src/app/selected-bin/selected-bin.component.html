@@ -1,18 +1,11 @@
 <div class="favorite-tab">
-  <div>
-    <p>Esta es la calle</p>
+  <div *ngIf="binInfo">
+    <p>{{binInfo.address[0].addressName}}</p>
   </div>
   <div class="buttons">
-    <div class="button">
-        <label class="switch">
-            <input type="checkbox">
-            <span class="sliderRound"></span>
-          </label>
-    </div>
-    <div class="button">
-      <button class="favorite" (click)="addFavorite(userId, selectedBinId)">
-      <img class="starIcon" src="../../assets/img/starFavs.png">
-      </button>
-    </div>
+    <button class="bags" (click)="changeBinBag(selectedBinId)">
+    </button>
+    <button class="favorite" (click)="addFavorite(userId, selectedBinId)">
+    </button>
   </div>
 </div>

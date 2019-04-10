@@ -1,4 +1,4 @@
-import { Component, OnInit, Input  } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 
 import { User } from '../user';
 import { Bin } from '../bin';
@@ -6,48 +6,75 @@ import { UsersService } from '../services/users.service';
 import { BinsService } from '../services/bins.service';
 
 
+
 @Component({
   selector: 'app-selected-bin',
   templateUrl: './selected-bin.component.html',
   styleUrls: ['./selected-bin.component.scss'],
 })
+
 export class SelectedBinComponent implements OnInit {
-
-  constructor(private usersService: UsersService, private binsService: BinsService) { }
-
-  public bins: Bin[];
+  
+  public favoriteBins: Bin[];
+  public _selectedBinId: string;
+  public binInfo: any;
   public users: User[];
   public userId = '5ca1fdf203f2ef6b8024750b';
 
-  @Input() public selectedBinId: string;
+  constructor(
+    private usersService: UsersService,
+    private binsService: BinsService
+  ) { }
 
-  ngOnInit() {
-
+  get selectedBinId(): string {
+    // transform value for display
+    return this._selectedBinId;
   }
 
-  // getOneBinInfo(selectedBinId): void {
-  //   this.binsService.getOneBinInfo(selectedBinId)
-  //   .subscribe(
-  //     (bin_observable) => this.bin = bin_observable
-  //     );
-  // }
+  @Input()
+  set selectedBinId(selectedBinId: string) {
+    console.log('prev value: ', this._selectedBinId);
+    console.log('got name: ', selectedBinId);
+    this._selectedBinId = selectedBinId;
+    if(selectedBinId.length){
+      this.getOneBinInfo(selectedBinId);
+    }
+  }
+
+
+  ngOnInit() {
+    this.getUserFavoriteBinsData(this.userId);
+  }
+
+  getOneBinInfo(selectedBinId: Bin["_id"]): any {
+    this.binsService.getOneBinInfo(selectedBinId)
+      .subscribe(
+        (bin_observable) => {
+        this.binInfo = bin_observable; 
+        }
+      );
+  }
 
   getUserFavoriteBinsData(userId): any {
     this.usersService.getUserFavoriteBinsData(userId)
-    .subscribe(
-      (user_observable) => {this.bins = user_observable;
-        console.log(this.bins);
-      }
-    );
+      .subscribe(
+        (bin_observable) => {
+          this.favoriteBins = [];
+          // bin_observable.length
+          console.log("hay " + bin_observable.length + " papeleras favoritas");
+          for (let i = 0; i < bin_observable.length; i++) {
+            this.favoriteBins.push(bin_observable[i]);
+          }
+
+        });
 
   }
 
 
-  // Gets userId from the atribute of this class
-  // Gets selectedBinId from home.page.ts
-  addFavorite(userId: User['_id'], selectedBinId: Bin['_id']): void {
-    const userBinFavoriteList = this.getUserFavoriteBinsData(this.userId);
-    const findBin = userBinFavoriteList.find(bin => bin._id === selectedBinId);
+  //Gets userId from the atribute of this class
+  //Gets selectedBinId from home.page.ts
+  addFavorite(userId: User["_id"], selectedBinId: Bin["_id"]): void {
+    const findBin = this.favoriteBins.find(bin => { return bin._id === selectedBinId });
     if (!findBin) {
       this.usersService.addFavoriteBin(userId, selectedBinId)
         .subscribe();
@@ -55,8 +82,12 @@ export class SelectedBinComponent implements OnInit {
       this.usersService.deleteBin(userId, selectedBinId)
         .subscribe();
     }
+    this.getUserFavoriteBinsData(userId);
+    // this.homePage.getBinData();
   }
 
-
+  changeBinBag(selectedBin: Bin["_id"]): void {
+    this.binsService.updateBinBags(selectedBin, this.binInfo.bag).subscribe();
+  }
 
 }

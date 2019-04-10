@@ -5,7 +5,7 @@
         <img class="dogAvatar" src="../assets/img/fakeDog.png">
         <ion-list>
           <ion-menu-toggle class="titlePages" auto-hide="true" *ngFor="let p of menuPages">
-            <ion-item class="titlePages" [routerDirection]="'root'" [routerLink]="[p.url]">
+            <ion-item class="titlePages" [routerDirection]="'root'" [routerLink]="[p.url]" detail='false'>
               <img class="menuIcon" slot="start" [src]="p.src">
               <ion-label>
                 {{p.title}}

@@ -1,47 +1,57 @@
 // http://ionicframework.com/docs/theming/
-@import '~@ionic/angular/css/core.css';
-@import '~@ionic/angular/css/normalize.css';
-@import '~@ionic/angular/css/structure.css';
-@import '~@ionic/angular/css/typography.css';
-@import '~@ionic/angular/css/display.css';
-@import '~@ionic/angular/css/padding.css';
-@import '~@ionic/angular/css/float-elements.css';
-@import '~@ionic/angular/css/text-alignment.css';
-@import '~@ionic/angular/css/text-transformation.css';
-@import '~@ionic/angular/css/flex-utils.css';
+@import "~@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,500,700");
+
+body {
+  font-family: var(--font);
+}
 
 * {
-    text-decoration: none;
+  text-decoration: none;
 }
 .title {
-    --background: #70CCC6;
-    font-family: 'Raleway', sans-serif, bold;
-    font-weight: bold;
+  ion-title {
+    background: #70ccc6;
+    font-family: "Raleway", sans-serif;
+    font-weight: var(--font-medium) !important;
     color: white;
+  }
+}
+
+ion-toolbar {
+  --min-height: 60px;
 }
 
 a .p {
-    width: 400px;
-    height: 5%;
-    font-family: 'Raleway', sans-serif, bold;
-    font-weight: bold;
-    color: black;
-    font-size: 100%;
-    padding-left: 40px;
-    margin-top: 10%;
-    position: relative;
-    .arrow {
-        position: absolute;
-        align-content:flex-end;
-        bottom: 3%;
-        right: 15%;
-    }
+  width: 400px;
+  height: 5%;
+  font-family: "Raleway", sans-serif, bold;
+  font-weight: bold;
+  color: black;
+  font-size: 100%;
+  padding-left: 40px;
+  margin-top: 10%;
+  position: relative;
+  .arrow {
+    position: absolute;
+    align-content: flex-end;
+    bottom: 3%;
+    right: 15%;
+  }
 }
 
- 
- 
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700');
-
-body{
-    font-family: var(--font);
+.backArrow {
+  box-shadow: 0px 0px !important;
+  color: var(--white);
+  background: transparent;
 }

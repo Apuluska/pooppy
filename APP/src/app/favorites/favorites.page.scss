@@ -1,22 +1,4 @@
-* {
-    text-decoration: none;
-    font-family: 'Raleway', sans-serif, bold;
-    font-weight: bold;
 
-  }
-  .title {
-    --background: #70CCC6;
-    font-family: 'Raleway', sans-serif, bold;
-    font-weight: bold;
-    color: white;
-  }
-
-p {
-    font-size: 80%;
-    text-align: justify;
-    margin-left: 5%;
-    margin-right: 5%;
-}
 .binFavs{
   position: relative;
   .deletedBin{
@@ -24,32 +6,8 @@ p {
     right: 10%;
   }
 }
-  a .p {
-    width: 400px;
-    height: 5%;
-    font-family: 'Raleway', sans-serif, bold;
-    font-weight: bold;
-    color: var(--dark-gray);
-    font-size: 100%;
-    padding-left: 40px;
-    margin-top: 10%;
-    position: relative;
-  }
-  hr {
-    width: 100%;
-    display: block;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 1px;
-    mix-blend-mode: normal;
-    opacity: 0.1;
-    border: 2px solid #1D1D26;
-}
-.backArrow {
-  box-shadow: 5px 5px #70CCC6;
-}
 
+.title ion-title{
+  padding-left: 84px;
+}
   

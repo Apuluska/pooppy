@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 import { User } from '../user';
 import { Bin } from '../bin';
@@ -19,7 +19,9 @@ export class SelectedBinComponent implements OnInit {
   public _selectedBinId: string;
   public binInfo: any;
   public users: User[];
-  public userId = '5ca1fdf203f2ef6b8024750b';
+  public userId = '5c9b28545f02671f443fb996'; 
+
+  @Output() bagsChangedEvent = new EventEmitter<string>();
 
   constructor(
     private usersService: UsersService,
@@ -33,8 +35,6 @@ export class SelectedBinComponent implements OnInit {
 
   @Input()
   set selectedBinId(selectedBinId: string) {
-    console.log('prev value: ', this._selectedBinId);
-    console.log('got name: ', selectedBinId);
     this._selectedBinId = selectedBinId;
     if(selectedBinId.length){
       this.getOneBinInfo(selectedBinId);
@@ -87,7 +87,9 @@ export class SelectedBinComponent implements OnInit {
   }
 
   changeBinBag(selectedBin: Bin["_id"]): void {
-    this.binsService.updateBinBags(selectedBin, this.binInfo.bag).subscribe();
+    this.binsService.updateBinBags(selectedBin, !this.binInfo.bag).subscribe();
+    this.bagsChangedEvent.next(selectedBin.toString());
   }
 
+  
 }

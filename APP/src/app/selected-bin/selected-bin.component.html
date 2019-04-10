@@ -1,9 +1,9 @@
 <div class="favorite-tab">
   <div>
-    <p>{{binInfo.address[0].addressName}}</p>
+    <p>hola</p>
   </div>
-  <div class="buttons">
-    <button class="bags"></button>
-    <button class="favorite" (click)="addFavorite(userId, selectedBinId)"></button>
+  <div>
+    <button class="bags" (click)="changeBinBag(selectedBinId)">Cambiar bolsas</button>
+    <button class="favorite" (click)="addFavorite(userId, selectedBinId)">Añadir a papeleras favoritas</button>
   </div>
 </div>

@@ -130,10 +130,10 @@ export class HomePage implements OnInit {
           let lng = parseFloat(bin_observable[i].address[0].lng);
           let statusBin= bin_observable[i].bag;
           if (statusBin===true){
-           iconBin= 'assets/img/bin_point_true.svg'}
-           else{
-               iconBin= 'assets/img/bin_point_false.svg'
-           }
+            iconBin= 'assets/img/bin_point_true.svg'}
+          else{
+            iconBin= 'assets/img/bin_point_false.svg'
+          }
          const marker=  new google.maps.Marker({
             position: { lat, lng },
             map: this.mapRef,
@@ -141,12 +141,21 @@ export class HomePage implements OnInit {
             icon: iconBin
           });
           marker.addListener('click', ()=> {
-            this.selectedBinId = marker.title;
+            console.log("clickada papelera");
+            this.selectedBin.changeBinBag(marker.title);
             this.selectedBin.getOneBinInfo(marker.title);
           });
         } 
     
       });
+  }
+
+  changeBinBag(): void{
+    console.log("a cambiar la papelera " + this.selectedBinId.toString())
+    //Esta funcion cambia el estado de la papelera en la base de datos
+    this.selectedBin.changeBinBag(this.selectedBinId);
+    //Ahora se vuelven a pintar las papeleras
+    this.getBinData();
   }
 
 }

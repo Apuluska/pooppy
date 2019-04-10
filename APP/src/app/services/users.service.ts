@@ -26,6 +26,7 @@ export class UsersService {
 
   getUserFavoriteBinsData(userId: string): Observable<Array<Bin>> {
     let endpointUrl = this.userUrl + '/' + userId + '/favoritebins';
+    console.log("Se va a llamar a " + endpointUrl);
     return this.http.get<Bin[]>(endpointUrl);
   }
 

@@ -29,22 +29,26 @@ export class SelectedBinComponent implements OnInit {
   public userId = '5ca1fdf203f2ef6b8024750b';
   
   ngOnInit() {
+    console.log("cargando selected bin")
     this.getUserFavoriteBinsData(this.userId);
   }
 
   getOneBinInfo(selectedBinId: Bin["_id"]): any {
     this.binsService.getOneBinInfo(selectedBinId)
     .subscribe(
-      (bin_observable) => {this.binInfo = bin_observable; console.log(this.binInfo)}
+      (bin_observable) => {
+        this.binInfo = bin_observable; 
+        console.log("retor " + this.binInfo);
+       }
       );
   }
-
   getUserFavoriteBinsData(userId): any {
    this.usersService.getUserFavoriteBinsData(userId)
    .subscribe(
     (bin_observable) => {
       this.favoriteBins = [];
      // bin_observable.length
+     console.log("hay " + bin_observable.length + " papeleras favoritas");
       for(let i = 0; i < bin_observable.length;i++){
         this.favoriteBins.push(bin_observable[i]);
       } 
@@ -69,15 +73,14 @@ export class SelectedBinComponent implements OnInit {
     // this.homePage.getBinData();
   }
 
-/* bagsTrueAndFalse(selectedBin: Bin["_id"]): void{
-
-  if(bag=== true){
-    bag=false
-  }else{
-    bag=true
-  } 
-} */
-
-
+  changeBinBag(selectedBin: Bin["_id"]): void{
+    console.log("a cambiar la papelera " + selectedBin)
+    this.binsService.getOneBinInfo(selectedBin)
+    .subscribe(
+      (bin_observable) => {
+        this.binsService.updateBinBags(selectedBin, !bin_observable[0].bag);
+       }
+      );
+}
 
 }

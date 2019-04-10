@@ -1,49 +1,24 @@
 import { Component } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  public appPages = [
-    {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'Favoritos',
-      url: '/favorites',
-      icon: 'heart'
-    },
-    {
-      title: 'Ayuda',
-      url: '/help',
-      icon: 'md-help-circle'
-    },
-    {
-      title: 'Acerca de',
-      url: '/about',
-      icon: 'md-information-circle'
-    }
-  ];
-
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
-  ) {
-    this.initializeApp();
+  constructor(private menu: MenuController) {}
+  openFirst() {
+    this.menu.enable(true, 'first');
+    this.menu.open('first');
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+  openEnd() {
+    this.menu.open('end');
+  }
+
+  openCustom() {
+    this.menu.enable(true, 'custom');
+    this.menu.open('custom');
   }
 }

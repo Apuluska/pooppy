@@ -1,0 +1,45 @@
+.my-custom-menu {
+  --width: 500px;
+}
+* {
+  --background: var(--blue);
+  font-family: var(--font) !important;
+  --border-style: none;
+  font-weight: 400;
+}
+.list-md {
+  margin-top: 15%;
+  background: var(--blue, var(--blue, --blue));
+}
+.menuIcon {
+  width: 20px;
+  margin-left: 10px;
+}
+.titlePages {
+  font-family: "Raleway", sans-serif;
+  color: white;
+}
+.dogAvatar {
+  border-radius: 100%;
+  height: 10%;
+  margin-top: 15%;
+  margin-left: 30px;
+  margin-bottom: 15px;
+  border: 3px solid white;
+}
+.logOut {
+  position: absolute;
+  bottom: 25px;
+  width: 100%;
+  .logOutIcon {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 20px;
+  }
+}
+a {
+  margin-left: 8%;
+  font-family: "Raleway", sans-serif, white;
+  color: white;
+  font-family: var(--font);
+}

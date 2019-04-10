@@ -20,12 +20,12 @@ export class UsersService {
 
   private userUrl = 'http://localhost:3000/user';  // URL to web api
 
-  addFavoriteBin (id_user: User["_id"], id_bin: Bin["_id"]): Observable<string> {
-    return this.http.post<User["_id"]>(`${this.userUrl}/favoritebins/add`, {id_user, id_bin}, this.httpOptions)
+  addFavoriteBin (id_user: User['_id'], id_bin: Bin['_id']): Observable<string> {
+    return this.http.post<User['_id']>(`${this.userUrl}/favoritebins/add`, {id_user, id_bin}, this.httpOptions);
   }
 
   getUserFavoriteBinsData(userId: string): Observable<Array<Bin>> {
-    let endpointUrl = this.userUrl + '/' + userId + '/favoritebins';
+    const endpointUrl = this.userUrl + '/' + userId + '/favoritebins';
     return this.http.get<Bin[]>(endpointUrl);
   }
 

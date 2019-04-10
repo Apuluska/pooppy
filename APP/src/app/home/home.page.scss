@@ -3,6 +3,18 @@
   height: 100%;
 }
 
+.burgerMenu{
+    position: absolute;
+    display: inline-block;
+    z-index: 1;
+    width: 6%;
+    left: 10px;
+    top: 10px;
+    .icon-inner, svg{
+        fill: var(--blue);
+    }
+}
+
 .favorite-tab{
     position: absolute;
     width: 100%;

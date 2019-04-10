@@ -3,7 +3,12 @@
     <p>{{binInfo.address[0].addressNam}}</p>
   </div>
   <div class="buttons">
-    <button class="bags"></button>
+    <button class="bags">
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </button>
     <button class="favorite" (click)="addFavorite(userId, selectedBinId)"></button>
   </div>
 </div>

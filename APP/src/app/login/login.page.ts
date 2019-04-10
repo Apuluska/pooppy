@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../services/auth-service.service';
 import { Router } from '@angular/router';
 import { User } from '../user';
-import { LoginPageModule } from './login.module';
 
 
 @Component({
@@ -14,7 +13,7 @@ import { LoginPageModule } from './login.module';
 export class LoginPage implements OnInit {
 
   user: User = new User();
-  verNombre = false;
+  checkMail = true;
 
   constructor(private authService: AuthService, public router: Router) {
     this.newUser();
@@ -26,7 +25,10 @@ newUser() {
 
 }
 onSubmitLogin() {
-  if (this.verNombre === true) {
+// TODO Llamar al servidor y ver si el email existe
+// Si existe checkMAil = true, Si no existe checkMAil = false
+
+  if (this.checkMail === false) {
     this.authService.createUser(this.user.email, this.user.password);
   } else {
     this.authService.login(this.user.email, this.user.password);
@@ -37,12 +39,11 @@ onSubmitLogin() {
     }).catch(err => alert('los datos son incorrectos o no existe el usuario')); */
   }
   goRegister() {
-    this.verNombre = true;
+    this.checkMail = false;
   }
   logOut() {
     this.authService.login(this.user.email, this.user.password);
   }
   ngOnInit() {
   }
-
 }

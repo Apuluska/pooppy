@@ -1,24 +1,21 @@
 import { Component, OnInit} from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
-
-
-declare var google;
-
-
+import {Location} from '@angular/common';
 import { Bin } from '../bin';
 import { BinsService } from '../services/bins.service';
 import { SelectedBinComponent } from '../selected-bin/selected-bin.component';
 
+/* import {SelectedBinComponent } from 'selected-bin/selected-bin.component' */
+
+declare var google;
 
 @Component({
-  selector: 'app-home', 
+  selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  mapRef = null;
 
   constructor(
     private geolocation: Geolocation,
@@ -28,6 +25,32 @@ export class HomePage implements OnInit {
   ) {
 
   }
+  mapRef = null;
+  selectedPath = '';
+  public menuPages = [
+    {
+      title: 'Favoritos',
+      url: '/menu/favorites',
+      icon: 'md-staricon',
+      src: '../assets/icon/md-staricon.svg'
+    },
+    {
+      title: 'Ayuda',
+      url: '/menu/help',
+      icon: 'helpicon.png',
+      src: '../assets/icon/helpicon.png'
+    },
+    {
+      title: 'Acerca de',
+      url: '/menu/about',
+      icon: 'infoicon.png',
+      src: '/../assets/icon/infoicon.png'
+    },
+  ];
+
+  latitude: number;
+  longitude: number;
+  public bin: Bin[];
 
   public selectedBinId: string;
 
@@ -46,43 +69,43 @@ export class HomePage implements OnInit {
       center: myLatLng,
       zoom: 12,
       disableDefaultUI: true,
-      styles: 
+      styles:
       [
         {
-          "featureType": "administrative",
-          "elementType": "geometry",
-          "stylers": [
+          'featureType': 'administrative',
+          'elementType': 'geometry',
+          'stylers': [
             {
-              "visibility": "off"
+              'visibility': 'off'
             }
           ]
         },
         {
-          "featureType": "poi",
-          "stylers": [
+          'featureType': 'poi',
+          'stylers': [
             {
-              "visibility": "off"
+              'visibility': 'off'
             }
           ]
         },
         {
-          "featureType": "road",
-          "elementType": "labels.icon",
-          "stylers": [
+          'featureType': 'road',
+          'elementType': 'labels.icon',
+          'stylers': [
             {
-              "visibility": "off"
+              'visibility': 'off'
             }
           ]
         },
         {
-          "featureType": "transit",
-          "stylers": [
+          'featureType': 'transit',
+          'stylers': [
             {
-              "visibility": "off"
+              'visibility': 'off'
             }
           ]
         }
-      ] 
+      ]
     });
     google.maps.event
     .addListenerOnce(this.mapRef, 'idle', () => {
@@ -96,8 +119,8 @@ export class HomePage implements OnInit {
       position: { lat, lng },
       map: this.mapRef,
       title: 'Hello World!',
-      icon:'assets/img/bin_point_true.svg',
-    }); 
+      icon: 'assets/img/bin_point_true.svg',
+    });
 
   }
 
@@ -111,9 +134,6 @@ export class HomePage implements OnInit {
     };
   }
 
-  latitude: number;
-  longitude: number;
-  public bin: Bin[];
 
 
 
@@ -122,16 +142,15 @@ export class HomePage implements OnInit {
       (bin_observable) => {
        // bin_observable.length
         let iconBin;
-        for(let i = 0; i < 20;i++){
-          let lat = parseFloat(bin_observable[i].address[0].lat);
-          let lng = parseFloat(bin_observable[i].address[0].lng);
-          let statusBin= bin_observable[i].bag;
-          if (statusBin===true){
-           iconBin= 'assets/img/bin_point_true.svg'}
-           else{
-               iconBin= 'assets/img/bin_point_false.svg'
+        for (let i = 0; i < 20; i++) {
+          const lat = parseFloat(bin_observable[i].address[0].lat);
+          const lng = parseFloat(bin_observable[i].address[0].lng);
+          const statusBin = bin_observable[i].bag;
+          if (statusBin === true) {
+           iconBin = 'assets/img/bin_point_true.svg'; } else {
+               iconBin = 'assets/img/bin_point_false.svg';
            }
-         const marker=  new google.maps.Marker({
+         const marker =  new google.maps.Marker({
             position: { lat, lng },
             map: this.mapRef,
             title: bin_observable[i]._id,
@@ -141,8 +160,8 @@ export class HomePage implements OnInit {
             this.selectedBinId = marker.title;
             this.selectedBin.getOneBinInfo(marker.title);
           });
-        } 
-    
+        }
+
       });
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -8,36 +9,21 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./help.page.scss'],
 })
 export class HelpPage implements OnInit {
+  showButton = false;
+  showText = false;
 
-  pages = [
-    {
-      title: 'First page with Tabs',
-      url: '/menu/first'
-    },
-    {
-      title: 'Second page blank',
-      url: '/menu/second'
-    }
-  ];
-  selectedPath = '';
-
-  constructor(private menu:
-    MenuController) {
+  constructor(private location: Location) {
   }
 
   ngOnInit() {
   }
-  openFirst() {
-    this.menu.enable(true, 'first');
-    this.menu.open('first');
+  showMeTheP() {
+    this.showText = !this.showText;
   }
-
-  openEnd() {
-    this.menu.open('end');
+  showMeTheText() {
+    this.showButton = !this.showButton;
   }
-
-  openCustom() {
-    this.menu.enable(true, 'custom');
-    this.menu.open('custom');
+  backClicked() {
+    this.location.back();
   }
 }

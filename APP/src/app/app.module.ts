@@ -16,6 +16,7 @@ import { SelectedBinComponent } from './selected-bin/selected-bin.component';
 
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,9 +28,9 @@ import { FormsModule } from '@angular/forms';
     MatCheckboxModule,
     MatMenuModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
-
+  
   providers: [
     Geolocation,
     StatusBar,

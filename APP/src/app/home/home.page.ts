@@ -17,6 +17,8 @@ declare var google;
 })
 export class HomePage implements OnInit {
 
+  public thisBinId = "";
+
   constructor(
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
@@ -137,32 +139,35 @@ export class HomePage implements OnInit {
 
 
 
-  getBinData(): void { this.binsService.getBinData()
+  getBinData(): void {           
+     this.binsService.getBinData()
       .subscribe(
       (bin_observable) => {
        // bin_observable.length
         let iconBin;
-        for (let i = 0; i < 20; i++) {
-          const lat = parseFloat(bin_observable[i].address[0].lat);
-          const lng = parseFloat(bin_observable[i].address[0].lng);
-          const statusBin = bin_observable[i].bag;
-          if (statusBin === true) {
-           iconBin = 'assets/img/bin_point_true.svg'; } else {
-               iconBin = 'assets/img/bin_point_false.svg';
-           }
-         const marker =  new google.maps.Marker({
+        for(let i = 0; i < 20;i++){
+          let lat = parseFloat(bin_observable[i].address[0].lat);
+          let lng = parseFloat(bin_observable[i].address[0].lng);
+          let statusBin= bin_observable[i].bag;
+          if (statusBin===true){
+            iconBin= 'assets/img/bin_point_true.svg'}
+          else{
+            iconBin= 'assets/img/bin_point_false.svg'
+          }
+         const marker=  new google.maps.Marker({
             position: { lat, lng },
             map: this.mapRef,
             title: bin_observable[i]._id,
             icon: iconBin
           });
           marker.addListener('click', ()=> {
-            this.selectedBinId = marker.title;
-            this.selectedBin.getOneBinInfo(marker.title);
+            // this.selectedBin.getOneBinInfo(marker.title);
+            this.thisBinId = marker.title
           });
         }
 
       });
   }
+
 
 }

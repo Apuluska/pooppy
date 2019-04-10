@@ -30,14 +30,16 @@ export class FavoritesPage implements OnInit {
     // this.bins = [];
     getFavoriteBinData(): any {
 
-      let userId = "5c9b28545f02671f443fb996";
+      let userId = "5ca1fdf203f2ef6b8024750b";
       this.usersService.getUserFavoriteBinsData(userId)
         .subscribe(
         (bin_observable) => {
-         this.bins = [];
-          for (let i = 0; i < bin_observable.length; i++) {
+          this.bins = [];
+          console.log(this.bins)
+          for(let i = 0; i < bin_observable.length;i++){
             this.bins.push(bin_observable[i]);
-          }
+          } 
+         
         });
     }
   

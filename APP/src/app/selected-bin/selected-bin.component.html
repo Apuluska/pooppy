@@ -1,14 +1,11 @@
 <div class="favorite-tab">
   <div *ngIf="binInfo">
-    <p>{{binInfo.address[0].addressNam}}</p>
+    <p>{{binInfo.address[0].addressName}}</p>
   </div>
   <div class="buttons">
-    <button class="bags">
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider round"></span>
-      </label>
+    <button class="bags" (click)="changeBinBag(selectedBinId)">
     </button>
-    <button class="favorite" (click)="addFavorite(userId, selectedBinId)"></button>
+    <button class="favorite" (click)="addFavorite(userId, selectedBinId)">
+    </button>
   </div>
 </div>

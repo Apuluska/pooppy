@@ -126,8 +126,6 @@ export class HomePage implements OnInit {
 
   }
 
-
-
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
     return {
@@ -135,9 +133,6 @@ export class HomePage implements OnInit {
       lng: rta.coords.longitude
     };
   }
-
-
-
 
   getBinData(): void {           
      this.binsService.getBinData()
@@ -161,7 +156,7 @@ export class HomePage implements OnInit {
             icon: iconBin
           });
           marker.addListener('click', ()=> {
-            // this.selectedBin.getOneBinInfo(marker.title);
+            this.selectedBin.getOneBinInfo(marker.title);
             this.thisBinId = marker.title
           });
         }

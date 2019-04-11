@@ -5,4 +5,6 @@
   <div id="map">
   </div>
 </ion-content>
-<app-selected-bin [selectedBinId]= "thisBinId"></app-selected-bin>
+<app-selected-bin [selectedBinId]= "thisBinId" (bagsChangedEvent)="getBinData()"></app-selected-bin>
+
+

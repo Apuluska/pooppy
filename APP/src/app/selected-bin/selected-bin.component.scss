@@ -5,32 +5,27 @@ p{
     border-bottom: 1px solid var(--dark-gray);
 }
 .buttons{
-    height: 20%;
+    height: 150px;
     margin-top: 10%;
     margin-bottom: 2%;
 }
 .favorite{
     width: 40%;
+    height: 90px;
     background-color: #70CCC6;
-    height: 100px;
     margin-left: 6%;
     border-radius: 12px;
-    height: 90%
+    padding: 10%;
 }
+
 .bags{
-    height: 114px;
+    height: 90px;
     width: 52%;
     margin-left: 1%;
     background: #F2F2F2;
     border-radius: 10px;
 }
-
-.container {
-    width: 100%;
-}
      
-
-      
 .switch-label {
     position: relative;
     z-index: 2;

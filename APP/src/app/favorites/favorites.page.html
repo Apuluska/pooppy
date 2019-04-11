@@ -12,7 +12,7 @@
       <ul>
           <li *ngFor="let bin of bins">
               <div class=binFavs>{{bin.address[0].addressName}} 
-                  <button class="deletedBin" (click)="deleteBin(bin._id)">
+                  <button class="deletedBinButton" (click)="deleteBin(bin._id)">
                     <img class="deletedBin" src="../../assets/img/deletedBin.png">
                   </button>
                   <hr noshade>

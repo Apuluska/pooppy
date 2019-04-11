@@ -1,18 +1,18 @@
 <ion-content padding center text-center>
-    <ion-list>
+    <ion-list class="login">
     <div class="avatarCircle"></div>
-    <img class="iconDog" src="../assets/img/fakeDog.png">
+    <img class="iconDog" src="../assets/img/dog.svg">
     <ion-item>
       <img class="iconLog" src="../assets/icon/emailIcon.png">
-      <input class="exampleText" type="text" [(ngModel)]=user.email placeholder="Introduce tu correo electrónico">
+      <input class="exampleText" type="text" [(ngModel)]=user.email placeholder="EMAIL">
     </ion-item>
     <ion-item>
       <img class="iconLog" src="../assets/icon/password_Icon.png">
-      <input class="exampleText" placeholder="Contraseña" type=password [(ngModel)]=user.password>
+      <input class="exampleText" placeholder="CONTRASEÑA" type=password [(ngModel)]=user.password>
       </ion-item>
+      <button class="button" (click)="onSubmitLogin()" expand="block" *ngIf="checkMail === true">Entra
+      </button>
   </ion-list>
-  <button class="button" (click)="onSubmitLogin()" expand="block" *ngIf="checkMail === true">Entra
-  </button>
   <button class="button" color="primary" (click)="onSubmitLogin()" expand="block" *ngIf="checkMail === false"> Regístrate
   </button>
 </ion-content>

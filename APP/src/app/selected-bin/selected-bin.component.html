@@ -1,4 +1,4 @@
-<div class="favorite-tab">
+<div [className]="binInfo ? 'favorite-tab' : 'hide'">
   <div *ngIf="binInfo">
     <p>{{binInfo.address[0].addressName}}</p>
   </div>

@@ -5,6 +5,7 @@
     bottom: 0;
     z-index: 1;
     background-color: var(--white);
+    transition: .8s bottom ease-in-out;
     p{
         font-weight: var(--font-medium);
         padding: 20px;
@@ -31,4 +32,10 @@
             background: var(--blue);
         }
     }
+}
+
+.hide{
+    position: absolute;
+    bottom: -200px;
+    transition: .8s bottom ease-in-out;
 }

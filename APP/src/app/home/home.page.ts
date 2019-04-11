@@ -121,7 +121,7 @@ export class HomePage implements OnInit {
       position: { lat, lng },
       map: this.mapRef,
       title: 'Hello World!',
-      icon: 'assets/img/bin_point_true.svg',
+      icon: 'assets/img/geolocation.svg',
     });
 
   }

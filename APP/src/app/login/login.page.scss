@@ -87,3 +87,13 @@ ion-toolbar{
     text-transform: uppercase;
     mix-blend-mode: normal;
 }
+ion-footer {
+    display: block;
+    position: relative;
+    -ms-flex-order: 1;
+    order: 1;
+    width: 100%;
+    z-index: 10;
+    height: 7%;
+    padding-top: 3%;
+}

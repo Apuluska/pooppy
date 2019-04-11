@@ -5,14 +5,18 @@
           <ion-icon name="arrow-back"></ion-icon>
         </button>
       </ion-buttons>
-      <ion-title>Favoritos</ion-title>
+      <ion-title>Papeleras favoritas</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
       <ul>
           <li *ngFor="let bin of bins">
-            <div>{{bin.address[0].addressName}}</div>
-            <ion-button (click)="deleteBin(bin._id)">Delete</ion-button>
+              <div class=binFavs>{{bin.address[0].addressName}} 
+                  <button class="deletedBinButton" (click)="deleteBin(bin._id)">
+                    <img class="deletedBin" src="../../assets/img/deletedBin.png">
+                  </button>
+                  <hr noshade>
+                </div>
           </li>
         </ul>
   </ion-content>

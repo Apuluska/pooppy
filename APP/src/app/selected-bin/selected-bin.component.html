@@ -4,8 +4,20 @@
   </div>
   <div class="buttons">
     <button class="bags" (click)="changeBinBag(selectedBinId)">
+      <div class="container">
+        <div class="switch">
+          <input type="radio" class="switch-input" name="view" value="week" id="week" checked>
+          <label for="week" class="switch-label switch-label-off">ON</label>
+          <input type="radio" class="switch-input" name="view" value="month" id="month">
+          <label for="month" class="switch-label switch-label-on">OFF</label>
+          <span class="switch-selection"></span>
+        </div>
+      </div>
     </button>
     <button class="favorite" (click)="addFavorite(userId, selectedBinId)">
+      <div class="imgStar">
+      <img src="../../assets/icon/starFavorites.png">
+      </div>
     </button>
   </div>
 </div>

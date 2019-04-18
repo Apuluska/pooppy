@@ -10,21 +10,24 @@ class UserProvider {
 
   async getFavoriteBinList(userId) {
     var favoriteBinsInfo = [];
-    console.log("El usuario es: " + userId);
-    let user = await userModel.findById(userId);
-     await console.log("user await");
-    await user.favoriteBins.map(async (binId) => {
-      let binInfo = binProvider.findBinById(binId);
-      favoriteBinsInfo.push(binInfo);
-      return favoriteBinsInfo;
+    let binList = [];
+    let resolvedFinalArray;
+    var infoUser = await userModel.findById(userId, (error, usuario) => {
+      var info = usuario.favoriteBins.map((binId) => {
+        let binInfo = binProvider.findBinById(binId);
+        favoriteBinsInfo.push(binInfo);
+        return favoriteBinsInfo;
+      });
+      resolvedFinalArray = Promise.all(info);
+      return resolvedFinalArray;
     });
-    await console.log("user despues de await");
-    const resolvedFinalArray = await Promise.all(favoriteBinsInfo);
-    return resolvedFinalArray;
-  }
-
-  async getUser () {
-    user
+    await infoUser.favoriteBins.forEach(element => {
+      if (element != null) {
+        binList.push(element);
+      }
+    });
+    await console.log(binList);
+    return await binList;
   }
 
   async addFavoriteBin(userId, idBin) {
@@ -62,9 +65,9 @@ class UserProvider {
   }
 
   async register(req, res) {
-    if(userExists(req.body.email)){
-      res.status(200).send({message: 'Usuario ya existe'})
-  }
+    if (userExists(req.body.email)) {
+      res.status(200).send({ message: 'Usuario ya existe' })
+    }
     var saltRounds = 10;
     await bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
       const user = new userModel({
@@ -78,18 +81,18 @@ class UserProvider {
         })
         res.status(200).send({ token: service.createToken(user) })
       });
-    
+
     });
   }
 
-  userExists(userEmail){
-    userModel.find({email: userEmail}, function(err, user){
-        if(user.length){
-            return true;
-        }else{
-            return false;
-        }
+  userExists(userEmail) {
+    userModel.find({ email: userEmail }, function (err, user) {
+      if (user.length) {
+        return true;
+      } else {
+        return false;
+      }
     })
-}
+  }
 }
 module.exports = new UserProvider();

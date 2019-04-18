@@ -30,22 +30,22 @@ export class FavoritesPage implements OnInit {
     // this.bins = [];
     getFavoriteBinData(): any {
 
-      let userId = "5ca1fdf203f2ef6b8024750b";
+      const userId = '5c9b28545f02671f443fb996';
       this.usersService.getUserFavoriteBinsData(userId)
         .subscribe(
         (bin_observable) => {
           this.bins = [];
-          console.log(this.bins)
-          for(let i = 0; i < bin_observable.length;i++){
+          console.log('mis papeleras' + this.bins);
+          for (let i = 0; i < bin_observable.length; i++) {
             this.bins.push(bin_observable[i]);
-          } 
-         
+          }
+
         });
     }
-  
-    public deleteBin(binId):void {
-      let userId = "5c9b28545f02671f443fb995";
-      this.usersService.deleteBin(userId,binId).
+
+    public deleteBin(binId): void {
+      const userId = '5c9b28545f02671f443fb996';
+      this.usersService.deleteBin(userId, binId).
       subscribe(
         this.getFavoriteBinData()
       );

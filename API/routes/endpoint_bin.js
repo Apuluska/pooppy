@@ -5,7 +5,8 @@ function binRoutes(app) {
     // Gets all the bins
     app.get("/bins", async function (req,res) {
         const bins = await BinProvider.findAll();
-        res.send(bins);
+        await console.log(bins);
+        await res.send(bins);
     });
     
     // Gets the info of one bin by his Id

@@ -19,7 +19,7 @@ export class SelectedBinComponent implements OnInit {
   public _selectedBinId: string;
   public binInfo: any;
   public users: User[];
-  public userId = '5c9b28545f02671f443fb996'; 
+  public userId = '5c9b28545f02671f443fb995'; 
 
   @Output() bagsChangedEvent = new EventEmitter<string>();
 

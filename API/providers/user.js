@@ -10,14 +10,21 @@ class UserProvider {
 
   async getFavoriteBinList(userId) {
     var favoriteBinsInfo = [];
+    console.log("El usuario es: " + userId);
     let user = await userModel.findById(userId);
-    user.favoriteBins.map(async (binId) => {
+     await console.log("user await");
+    await user.favoriteBins.map(async (binId) => {
       let binInfo = binProvider.findBinById(binId);
       favoriteBinsInfo.push(binInfo);
       return favoriteBinsInfo;
     });
+    await console.log("user despues de await");
     const resolvedFinalArray = await Promise.all(favoriteBinsInfo);
     return resolvedFinalArray;
+  }
+
+  async getUser () {
+    user
   }
 
   async addFavoriteBin(userId, idBin) {

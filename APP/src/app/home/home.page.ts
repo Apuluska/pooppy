@@ -17,13 +17,13 @@ declare var google;
 })
 export class HomePage implements OnInit {
 
-  public thisBinId = "";
+  public thisBinId = '';
 
   constructor(
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
     private binsService: BinsService,
-    private selectedBin: SelectedBinComponent 
+    private selectedBin: SelectedBinComponent
   ) {
 
   }
@@ -115,9 +115,8 @@ export class HomePage implements OnInit {
       this.addMaker(myLatLng.lat, myLatLng.lng);
     });
   }
-  
   public addMaker(lat: number, lng: number) {
-      const marker= new google.maps.Marker({
+      const marker = new google.maps.Marker({
       position: { lat, lng },
       map: this.mapRef,
       title: 'Hello World!',
@@ -134,30 +133,29 @@ export class HomePage implements OnInit {
     };
   }
 
-  getBinData(): void {           
+  getBinData(): void {
      this.binsService.getBinData()
       .subscribe(
       (bin_observable) => {
        // bin_observable.length
         let iconBin;
-        for(let i = 0; i < 20;i++){
-          let lat = parseFloat(bin_observable[i].address[0].lat);
-          let lng = parseFloat(bin_observable[i].address[0].lng);
-          let statusBin= bin_observable[i].bag;
-          if (statusBin===true){
-            iconBin= 'assets/img/bin_point_true.svg'}
-          else{
-            iconBin= 'assets/img/bin_point_false.svg'
+        for (let i = 0; i < 20; i++) {
+          const lat = parseFloat(bin_observable[i].address[0].lat);
+          const lng = parseFloat(bin_observable[i].address[0].lng);
+          const statusBin = bin_observable[i].bag;
+          if (statusBin === true) {
+            iconBin = 'assets/img/bin_point_true.svg'; } else {
+            iconBin = 'assets/img/bin_point_false.svg';
           }
-         const marker=  new google.maps.Marker({
+         const marker =  new google.maps.Marker({
             position: { lat, lng },
             map: this.mapRef,
             title: bin_observable[i]._id,
             icon: iconBin
           });
-          marker.addListener('click', ()=> {
+          marker.addListener('click', () => {
             this.selectedBin.getOneBinInfo(marker.title);
-            this.thisBinId = marker.title
+            this.thisBinId = marker.title;
           });
         }
 

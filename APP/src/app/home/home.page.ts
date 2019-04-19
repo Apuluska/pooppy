@@ -18,6 +18,7 @@ declare var google;
 export class HomePage implements OnInit {
 
   public thisBinId = "";
+  public markers = [];
 
   constructor(
     private geolocation: Geolocation,
@@ -55,6 +56,8 @@ export class HomePage implements OnInit {
   public bin: Bin[];
 
   public selectedBinId: string;
+
+  idOfSelectedBin = null;
 
   ngOnInit() {
     this.loadMap();
@@ -140,6 +143,7 @@ export class HomePage implements OnInit {
       (bin_observable) => {
        // bin_observable.length
         let iconBin;
+        this.clearMarkers();
         for(let i = 0; i < 20;i++){
           let lat = parseFloat(bin_observable[i].address[0].lat);
           let lng = parseFloat(bin_observable[i].address[0].lng);
@@ -153,16 +157,85 @@ export class HomePage implements OnInit {
             position: { lat, lng },
             map: this.mapRef,
             title: bin_observable[i]._id,
-            icon: iconBin
+            icon: iconBin,
+            has_bags: statusBin
           });
           marker.addListener('click', ()=> {
+            //console.log("titulo1");
+            //console.log(this.thisBinId);
+            //console.log("titulo2");
+            //console.log(marker.title);
+            if(this.idOfSelectedBin){
+              this.unselectBin(this.thisBinId);
+            }
+
+            console.log("Esto es lo que hay");
+            console.log(this.idOfSelectedBin);
+            console.log(marker.icon)
+            if(this.idOfSelectedBin){
+              console.log("Primera true");
+            }else{
+              console.log("Primera false");
+
+            }
+
+            if(marker.title === this.thisBinId){
+              console.log("Segunda true");
+            }else{
+              console.log("Segunda false");
+            }
+
+            if(this.idOfSelectedBin && marker.title === this.thisBinId){
+              this.unselectBin(marker.title);
+            }else{
+              this.selectBin(marker.title);
+            }
             this.selectedBin.getOneBinInfo(marker.title);
             this.thisBinId = marker.title
           });
+          this.markers.push(marker);
         }
 
       });
   }
 
+  selectBin(binId){
+    console.log("select");
+    console.log(binId);
+    for(let i=0; i< this.markers.length; i++){
+      if(this.markers[i].title === binId){
+        //console.log("encontrado");
+        this.markers[i].setIcon('assets/img/bin_point_selected.png');
+        this.markers[i].icon = 'assets/img/bin_point_selected.png';
+        this.idOfSelectedBin = binId;
+        return;
+      }
+    }
+  }
+
+  unselectBin(binId){
+    console.log("unselect");
+    console.log(binId);
+    for(let i=0; i< this.markers.length; i++){
+      if(this.markers[i].title === binId){
+        //console.log("encontrado");
+        //console.log(this.markers[i].has_bags);
+        if(this.markers[i].has_bags){
+          this.markers[i].setIcon('assets/img/bin_point_true.svg');
+        }else{
+          this.markers[i].setIcon('assets/img/bin_point_false.svg');
+        }
+        this.idOfSelectedBin = null;
+        return;
+      }
+    }
+  }
+
+  clearMarkers(): void{
+    for(let i=0;i<this.markers.length;i++){
+      this.markers[i].setMap(null);
+    }
+    this.markers = [];
+  }
 
 }

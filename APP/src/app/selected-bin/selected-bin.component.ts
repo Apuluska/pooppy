@@ -4,6 +4,7 @@ import { User } from '../user';
 import { Bin } from '../bin';
 import { UsersService } from '../services/users.service';
 import { BinsService } from '../services/bins.service';
+import { StorageService } from '../services/storage.service';
 
 
 
@@ -19,13 +20,14 @@ export class SelectedBinComponent implements OnInit {
   public _selectedBinId: string;
   public binInfo: any;
   public users: User[];
-  public userId = '5c9b28545f02671f443fb996';
+  public userId = this.storageService.getUsers();
 
   @Output() bagsChangedEvent = new EventEmitter<string>();
 
   constructor(
     private usersService: UsersService,
-    private binsService: BinsService
+    private binsService: BinsService,
+    private storageService: StorageService
   ) { }
 
   get selectedBinId(): string {

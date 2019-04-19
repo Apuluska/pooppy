@@ -48,27 +48,31 @@ class UserProvider {
   }
 
   login(req, res) {
-    console.log("req: " + JSON.stringify(req.body));
     userModel.find({ email: req.body.user.email }, (err, user) => {
       console.log('llega'+user);
+      if (err) return res.status(500).send({ message: err })
       if (user.length === 0 || user == null) {
-        console.log('usuario vacio');
         return res.status(200).send(new userModel());
       } else {
-        console.log('usuario lleno');
-        return res.status(200).send(user[0]);
-        /* bcrypt.compare(req.body.password, user[0].password, function (err, check) {
-          console.log(user[0].password);
+        /* return res.status(200).send(user[0]); */
+        ///TODO REVISAR
+        console.log('pass desde el front: ' + req.body.user.password);
+        console.log('pass desde la bbdd: ' + user[0].password);
+        bcrypt.compare(req.body.user.password, user[0].password, function (err, check) {
+          console.log("entra aqui eerr" + err);
+          console.log("entra aqui2" + check);
+
           if (check) {
             return res.status(200).send({
               message: "Te has logado correctamente",
               token: service.createToken(user)
             })
+          } else {
+            return res.status(200).send({ message: "Usuario o clave incorrecta" })
           }
-          console.log('El usuario creado es: ' + user);
-          console.log('Ha fallado: ' + err);
-          return null; */
-          /*      if (err) return res.status(500).send({ message: err })
+        });
+          return null;
+          /*      
          
                bcrypt.compare(req.body.password, user[0].password, function (err, check) {
                  console.log(user[0].password);

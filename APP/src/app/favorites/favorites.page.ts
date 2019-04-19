@@ -57,11 +57,12 @@ export class FavoritesPage implements OnInit {
       }
     );
   }
-  public deleteBin(binId): void {
-    const userId = '5c9b28545f02671f443fb996';
-    this.usersService.deleteBin(userId, binId).
-      subscribe(
-        this.getFavoriteBinData()
+  async deleteBin(binId) {
+    const user = await this.storageService.getUsers();
+    await this.usersService.deleteBin(user._id, binId).
+      subscribe(() => {
+        this.getFavoriteBinData();
+      }
       );
   }
 }

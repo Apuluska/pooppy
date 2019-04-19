@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
 
 newUser() {
   this.user.email = '';
-  this.user.password = '';
+  this.user.token = '';
 
 }
 onSubmitLogin() {
@@ -29,20 +29,27 @@ onSubmitLogin() {
 // Si existe checkMAil = true, Si no existe checkMAil = false
 
   if (this.checkMail === false) {
-    this.authService.createUser(this.user.email, this.user.password);
+    this.authService.createUser(this.user);
   } else {
-    this.authService.login(this.user.email, this.user.password);
+    this.authService.login(this.user).subscribe((user: User) => {
+      if (user.email == null) {
+        this.checkMail = false;
+      } else {
+        this.router.navigate(['/home']);
+      }
+      }
+    );
   }
-   /*  ESTO SE DESCOMENTA CUANDO SE CONECTE CON LA BBDD
-   this.authService.login(this.user.email, this.user.password).then( res => {
+
+/*    this.authService.login(this.user).subscribe( res => {
       this.router.navigate(['/home']);
-    }).catch(err => alert('los datos son incorrectos o no existe el usuario')); */
+    }).catch(err => alert('los datos son incorrectos o no existe el usuario'));*/
   }
   goRegister() {
     this.checkMail = false;
   }
   logOut() {
-    this.authService.login(this.user.email, this.user.password);
+    this.authService.login(this.user);
   }
   ngOnInit() {
   }

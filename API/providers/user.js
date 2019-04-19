@@ -26,8 +26,8 @@ class UserProvider {
         binList.push(element);
       }
     });
-    await console.log(binList);
-    return await binList;
+/*     await console.log(binList);
+ */    return await binList;
   }
 
   async addFavoriteBin(userId, idBin) {
@@ -48,51 +48,73 @@ class UserProvider {
   }
 
   login(req, res) {
-    userModel.find({ email: req.body.email }, (err, user) => {
-      if (err) return res.status(500).send({ message: err })
-      bcrypt.compare(req.body.password, user[0].password, function (err, check) {
-        console.log(user[0].password);
-        if (check) {
-          return res.status(200).send({
-            message: "Te has logado correctamente",
-            token: service.createToken(user)
-          })
-        } else {
-          return res.status(200).send({ message: "Usuario o clave incorrecta" })
-        }
-      });
-    })
-  }
-
-  async register(req, res) {
-    if (userExists(req.body.email)) {
-      res.status(200).send({ message: 'Usuario ya existe' })
-    }
-    var saltRounds = 10;
-    await bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
-      const user = new userModel({
-        email: req.body.email,
-        password: hash
-      });
-
-      await user.save((err) => {
-        if (err) res.status(500).send({
-          message: `Error al crear usuario: $(err)`
-        })
-        res.status(200).send({ token: service.createToken(user) })
-      });
-
-    });
-  }
-
-  userExists(userEmail) {
-    userModel.find({ email: userEmail }, function (err, user) {
-      if (user.length) {
-        return true;
+    console.log("req: " + JSON.stringify(req.body));
+    userModel.find({ email: req.body.user.email }, (err, user) => {
+      console.log('llega'+user);
+      if (user.length === 0 || user == null) {
+        console.log('usuario vacio');
+        return res.status(200).send(new userModel());
       } else {
-        return false;
+        console.log('usuario lleno');
+        return res.status(200).send(req.body.user)
+        /* bcrypt.compare(req.body.password, user[0].password, function (err, check) {
+          console.log(user[0].password);
+          if (check) {
+            return res.status(200).send({
+              message: "Te has logado correctamente",
+              token: service.createToken(user)
+            })
+          }
+          console.log('El usuario creado es: ' + user);
+          console.log('Ha fallado: ' + err);
+          return null; */
+          /*      if (err) return res.status(500).send({ message: err })
+         
+               bcrypt.compare(req.body.password, user[0].password, function (err, check) {
+                 console.log(user[0].password);
+                 if (check) {
+                   return res.status(200).send({
+                     message: "Te has logado correctamente",
+                     token: service.createToken(user)
+                   })
+                 } else {
+                   return res.status(200).send({ message: "Usuario o clave incorrecta" })
+                 }
+               });
+        }) */
       }
     })
   }
-}
+
+      async register(req, res) {
+        if (userExists(req.body.email)) {
+          res.status(200).send({ message: 'Usuario ya existe' })
+        }
+        var saltRounds = 10;
+        await bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
+          const user = new userModel({
+            email: req.body.email,
+            password: hash
+          });
+
+          await user.save((err) => {
+            if (err) res.status(500).send({
+              message: `Error al crear usuario: $(err)`
+            })
+            res.status(200).send({ token: service.createToken(user) })
+          });
+
+        });
+      }
+
+      userExists(userEmail) {
+        userModel.find({ email: userEmail }, function (err, user) {
+          if (user.length) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+      }
+    }
 module.exports = new UserProvider();

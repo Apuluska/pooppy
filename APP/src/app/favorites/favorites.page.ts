@@ -44,7 +44,7 @@ export class FavoritesPage implements OnInit {
     }
   
     public deleteBin(binId):void {
-      let userId = "5c9b28545f02671f443fb996";
+      let userId = "5ca1fdf203f2ef6b8024750b";
       this.usersService.deleteBin(userId,binId).
       subscribe(
         this.getFavoriteBinData()

@@ -1,0 +1,14 @@
+.about{
+    font-family: var(--font);
+    button {
+      font-size: 16px;
+      width: 100%;
+      height: 65px;
+      text-align: left;
+      padding: 10px 20px;
+      background: transparent;
+      display: table;
+      border-bottom: 1px solid var(--dark-gray);
+      transition: 0.5 color;
+    }
+}

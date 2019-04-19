@@ -19,7 +19,8 @@ export class SelectedBinComponent implements OnInit {
   public _selectedBinId: string;
   public binInfo: any;
   public users: User[];
-  public userId = '5c9b28545f02671f443fb996'; 
+  public active;
+  public userId = '5ca1fdf203f2ef6b8024750b'; 
 
   @Output() bagsChangedEvent = new EventEmitter<string>();
 
@@ -39,6 +40,7 @@ export class SelectedBinComponent implements OnInit {
     if(selectedBinId.length){
       this.getOneBinInfo(selectedBinId);
     }
+    console.log(this.active);
   }
 
 
@@ -87,6 +89,7 @@ export class SelectedBinComponent implements OnInit {
   }
 
   changeBinBag(selectedBin: Bin["_id"]): void {
+  
     this.binsService.updateBinBags(selectedBin, !this.binInfo.bag).subscribe();
     this.bagsChangedEvent.next(selectedBin.toString());
   }

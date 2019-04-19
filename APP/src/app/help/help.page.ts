@@ -9,19 +9,19 @@ import {Location} from '@angular/common';
   styleUrls: ['./help.page.scss'],
 })
 export class HelpPage implements OnInit {
-  showButton = false;
-  showText = false;
+  showButton;
 
   constructor(private location: Location) {
   }
 
   ngOnInit() {
   }
-  showMeTheP() {
-    this.showText = !this.showText;
-  }
-  showMeTheText() {
-    this.showButton = !this.showButton;
+  showMeTheText(number) {
+    if(this.showButton === number){
+      this.showButton = "";
+    }else{
+      this.showButton = number;
+    }
   }
   backClicked() {
     this.location.back();

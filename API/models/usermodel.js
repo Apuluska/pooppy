@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var userSchema = new Schema({
-  idUser: ObjectId,
+  _id: ObjectId,
   email: String,
   password: String,
   //favoriteBins: [{ idBin: ObjectId }]

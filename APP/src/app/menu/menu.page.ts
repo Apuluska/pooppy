@@ -27,7 +27,7 @@ export class MenuPage implements OnInit {
       title: 'Acerca de',
       url: '/menu/about',
       icon: 'infoicon.png',
-      src: '/../assets/icon/infoicon.png'
+      src: '../assets/icon/infoicon.png'
     },
   ];
 

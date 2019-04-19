@@ -14,7 +14,7 @@ import { BinsService } from '../services/bins.service';
 })
 
 export class SelectedBinComponent implements OnInit {
-  
+
   public favoriteBins: Bin[];
   public _selectedBinId: string;
   public binInfo: any;
@@ -37,10 +37,9 @@ export class SelectedBinComponent implements OnInit {
   @Input()
   set selectedBinId(selectedBinId: string) {
     this._selectedBinId = selectedBinId;
-    if(selectedBinId.length){
+    if (selectedBinId.length) {
       this.getOneBinInfo(selectedBinId);
     }
-    console.log(this.active);
   }
 
 
@@ -48,11 +47,11 @@ export class SelectedBinComponent implements OnInit {
     this.getUserFavoriteBinsData(this.userId);
   }
 
-  getOneBinInfo(selectedBinId: Bin["_id"]): any {
+  getOneBinInfo(selectedBinId: Bin['_id']): any {
     this.binsService.getOneBinInfo(selectedBinId)
       .subscribe(
         (bin_observable) => {
-        this.binInfo = bin_observable; 
+        this.binInfo = bin_observable;
         }
       );
   }
@@ -63,7 +62,6 @@ export class SelectedBinComponent implements OnInit {
         (bin_observable) => {
           this.favoriteBins = [];
           // bin_observable.length
-          console.log("hay " + bin_observable.length + " papeleras favoritas");
           for (let i = 0; i < bin_observable.length; i++) {
             this.favoriteBins.push(bin_observable[i]);
           }
@@ -73,10 +71,10 @@ export class SelectedBinComponent implements OnInit {
   }
 
 
-  //Gets userId from the atribute of this class
-  //Gets selectedBinId from home.page.ts
-  addFavorite(userId: User["_id"], selectedBinId: Bin["_id"]): void {
-    const findBin = this.favoriteBins.find(bin => { return bin._id === selectedBinId });
+  // Gets userId from the atribute of this class
+  // Gets selectedBinId from home.page.ts
+  addFavorite(userId: User['_id'], selectedBinId: Bin['_id']): void {
+    const findBin = this.favoriteBins.find(bin => bin._id === selectedBinId);
     if (!findBin) {
       this.usersService.addFavoriteBin(userId, selectedBinId)
         .subscribe();
@@ -88,11 +86,10 @@ export class SelectedBinComponent implements OnInit {
     // this.homePage.getBinData();
   }
 
-  changeBinBag(selectedBin: Bin["_id"]): void {
-  
+  changeBinBag(selectedBin: Bin['_id']): void {
     this.binsService.updateBinBags(selectedBin, !this.binInfo.bag).subscribe();
     this.bagsChangedEvent.next(selectedBin.toString());
   }
 
-  
+
 }

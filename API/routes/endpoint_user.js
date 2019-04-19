@@ -28,8 +28,8 @@ function userRoutes(app) {
         res.send(user);
     });
 
-    app.post("/user/login", async function (req, res) {
-        await UserProvider.login(req,res);
+    app.post("/user/login", function (req, res) {
+     UserProvider.login(req,res);
     });
 
     app.post("/user/register", async function (req, res) {

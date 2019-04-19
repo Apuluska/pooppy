@@ -72,8 +72,7 @@ class UserProvider {
           }
         });
           return null;
-          /*      
-         
+          /*               
                bcrypt.compare(req.body.password, user[0].password, function (err, check) {
                  console.log(user[0].password);
                  if (check) {

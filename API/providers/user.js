@@ -56,7 +56,7 @@ class UserProvider {
         return res.status(200).send(new userModel());
       } else {
         console.log('usuario lleno');
-        return res.status(200).send(req.body.user)
+        return res.status(200).send(user[0]);
         /* bcrypt.compare(req.body.password, user[0].password, function (err, check) {
           console.log(user[0].password);
           if (check) {

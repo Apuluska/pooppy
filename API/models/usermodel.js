@@ -9,9 +9,9 @@ var userSchema = new Schema({
   //favoriteBins: [{ idBin: ObjectId }]
   favoriteBins: [{ type: ObjectId, ref: 'Bin' }]
 },
-  { collection: 'users.json' });
+  { collection: 'user' });
 
 
-const userModel = mongoose.model("users.json", userSchema);
+const userModel = mongoose.model("user", userSchema);
 
 module.exports = userModel;

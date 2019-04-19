@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../services/auth-service.service';
 import { Router } from '@angular/router';
 import { User } from '../user';
+import { StorageService } from '../services/storage.service';
 
 
 @Component({
@@ -15,13 +16,14 @@ export class LoginPage implements OnInit {
   user: User = new User();
   checkMail = true;
 
-  constructor(private authService: AuthService, public router: Router) {
+  constructor(private authService: AuthService, public router: Router, private storageService: StorageService) {
     this.newUser();
   }
 
 newUser() {
   this.user.email = '';
-  this.user.token = '';
+  this.user.password = '';
+  this.user._id = '';
 
 }
 onSubmitLogin() {
@@ -31,10 +33,11 @@ onSubmitLogin() {
   if (this.checkMail === false) {
     this.authService.createUser(this.user);
   } else {
-    this.authService.login(this.user).subscribe((user: User) => {
+    this.authService.login(this.user).subscribe((user) => {
       if (user.email == null) {
         this.checkMail = false;
       } else {
+        this.storageService.addUser(user);
         this.router.navigate(['/menu/home']);
       }
       }

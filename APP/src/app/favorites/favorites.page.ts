@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import { Bin } from '../bin';
 import { UsersService } from '../services/users.service';
 import { BinsService } from '../services/bins.service';
+import { StorageService } from '../services/storage.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-favorites',
@@ -15,7 +17,8 @@ export class FavoritesPage implements OnInit {
   constructor(
     private usersService: UsersService,
     private location: Location,
-    private userBinServ: BinsService
+    private userBinServ: BinsService,
+    private storageService: StorageService
   ) { }
 
   public bins = [];
@@ -30,10 +33,12 @@ export class FavoritesPage implements OnInit {
   // userId es el id del usuario logueado, hay que ver de donde lo saca el front
   // getFavoriteBinData(userId: string): any { //Esta es la linea que deberia quedar, debe recibir el userid por parametro
   // this.bins = [];
-  getFavoriteBinData(): any {
+  async getFavoriteBinData() {
 
-    const userId = '5c9b28545f02671f443fb996';
-    this.usersService.getUserFavoriteBinsData(userId)
+    /*     const userId = '5c9b28545f02671f443fb996';
+     */
+    const user = await this.storageService.getUsers();
+    await this.usersService.getUserFavoriteBinsData(user._id)
       .subscribe(
         (bin_observable) => {
           this.bins = [];

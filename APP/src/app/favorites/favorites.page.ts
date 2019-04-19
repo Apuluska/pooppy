@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 
 import { Bin } from '../bin';
 import { UsersService } from '../services/users.service';
+import { BinsService } from '../services/bins.service';
 
 @Component({
   selector: 'app-favorites',
@@ -13,41 +14,49 @@ import { UsersService } from '../services/users.service';
 export class FavoritesPage implements OnInit {
   constructor(
     private usersService: UsersService,
-    private location: Location
-    ) {}
+    private location: Location,
+    private userBinServ: BinsService
+  ) { }
 
-    public bins = [];
+  public bins = [];
 
-    ngOnInit() {
-      this.getFavoriteBinData();
-    }
-    backClicked() {
-      this.location.back();
-    }
+  ngOnInit() {
+    this.getFavoriteBinData();
+  }
+  backClicked() {
+    this.location.back();
+  }
 
   // userId es el id del usuario logueado, hay que ver de donde lo saca el front
-    // getFavoriteBinData(userId: string): any { //Esta es la linea que deberia quedar, debe recibir el userid por parametro
-    // this.bins = [];
-    getFavoriteBinData(): any {
+  // getFavoriteBinData(userId: string): any { //Esta es la linea que deberia quedar, debe recibir el userid por parametro
+  // this.bins = [];
+  getFavoriteBinData(): any {
 
-      const userId = '5c9b28545f02671f443fb996';
-      this.usersService.getUserFavoriteBinsData(userId)
-        .subscribe(
+    const userId = '5c9b28545f02671f443fb996';
+    this.usersService.getUserFavoriteBinsData(userId)
+      .subscribe(
         (bin_observable) => {
           this.bins = [];
-          console.log('mis papeleras' + this.bins);
+          const binId = [];
           for (let i = 0; i < bin_observable.length; i++) {
-            this.bins.push(bin_observable[i]);
+            binId.push(bin_observable[i]);
           }
-
+          this.getFavoriteBinsByUser(binId);
+          console.log('mis papeleras' + this.bins);
         });
-    }
-
-    public deleteBin(binId): void {
-      const userId = '5c9b28545f02671f443fb996';
-      this.usersService.deleteBin(userId, binId).
+  }
+  getFavoriteBinsByUser(array: Array<string>) {
+    this.userBinServ.getBinDataByUser(array).subscribe(
+      (bin) => {
+        this.bins = bin;
+      }
+    );
+  }
+  public deleteBin(binId): void {
+    const userId = '5c9b28545f02671f443fb996';
+    this.usersService.deleteBin(userId, binId).
       subscribe(
         this.getFavoriteBinData()
       );
-    }
   }
+}

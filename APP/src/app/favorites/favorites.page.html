@@ -1,23 +1,22 @@
 <ion-header>
-    <ion-toolbar class="title">
-      <ion-buttons slot="start">
-        <button class="backArrow" (click)="backClicked()">  
-          <ion-icon name="arrow-back"></ion-icon>
+  <ion-toolbar class="title">
+    <ion-buttons slot="start">
+      <button class="backArrow" (click)="backClicked()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Papeleras favoritas</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ul>
+    <li *ngFor="let bin of bins">
+      <div *ngIf="bin != null && bin.address != null" class=binFavs>{{bin.address[0].addressName}}
+        <button class="deletedBinButton" (click)="deleteBin(bin._id)">
+          <img class="deletedBin" src="../../assets/img/deletedBin.png">
         </button>
-      </ion-buttons>
-      <ion-title>Papeleras favoritas</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-      <ul>
-          <li *ngFor="let bin of bins">
-              <div class=binFavs>{{bin.address[0].addressName}} 
-                  <button class="deletedBinButton" (click)="deleteBin(bin._id)">
-                    <img class="deletedBin" src="../../assets/img/deletedBin.png">
-                  </button>
-                  <hr noshade>
-                </div>
-          </li>
-        </ul>
-  </ion-content>
-
+        <hr noshade>
+      </div>
+    </li>
+  </ul>
+</ion-content>

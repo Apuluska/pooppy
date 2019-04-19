@@ -17,17 +17,20 @@ export class BinsService {
   private binUrl = 'http://localhost:3000/bins';  // URL to web api
 
   getBinData(): Observable<Array<Bin>> {
-    return this.http.get<Bin[]>(this.binUrl)
+    return this.http.get<Bin[]>(this.binUrl);
   }
 
   getOneBinInfo(binId: string): Observable<Array<Bin>> {
     // return this.http.get<Bin[]>(`${this.binUrl}/?id=${binId}`)
-    return this.http.get<Bin[]>(this.binUrl + '/' + binId)
+    return this.http.get<Bin[]>(this.binUrl + '/' + binId);
   }
- 
-  updateBinBags(binId: string, hasBags: boolean):  Observable<Bin> {
+
+  updateBinBags(binId: string, hasBags: boolean): Observable<Bin> {
     // return this.http.get<Bin[]>(`${this.binUrl}/?id=${binId}`)
-    return this.http.put<Bin>(this.binUrl + '/bags', {"id": binId, "info": hasBags.toString()})
+    return this.http.put<Bin>(this.binUrl + '/bags', { 'id': binId, 'info': hasBags.toString() });
   }
-  
+  getBinDataByUser(binId): Observable<Array<Bin>> {
+    return this.http.post<Bin[]>('http://localhost:3000/binUser', binId, this.httpOptions);
+  }
+
 }

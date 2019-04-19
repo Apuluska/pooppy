@@ -35,7 +35,7 @@ onSubmitLogin() {
       if (user.email == null) {
         this.checkMail = false;
       } else {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/menu/home']);
       }
       }
     );

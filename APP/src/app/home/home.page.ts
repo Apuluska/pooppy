@@ -57,8 +57,8 @@ export class HomePage implements OnInit {
   public selectedBinId: string;
 
   ngOnInit() {
+
     this.loadMap();
-    this.getBinData();
   }
 
 
@@ -114,6 +114,8 @@ export class HomePage implements OnInit {
       loading.dismiss();
       this.addMaker(myLatLng.lat, myLatLng.lng);
     });
+    console.log('He cargado el mapa');
+    this.getBinData();
   }
   public addMaker(lat: number, lng: number) {
       const marker = new google.maps.Marker({
@@ -139,7 +141,8 @@ export class HomePage implements OnInit {
       (bin_observable) => {
        // bin_observable.length
         let iconBin;
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < bin_observable.length; i++) {
+          if (bin_observable != null && bin_observable[i].address != null) {
           const lat = parseFloat(bin_observable[i].address[0].lat);
           const lng = parseFloat(bin_observable[i].address[0].lng);
           const statusBin = bin_observable[i].bag;
@@ -158,6 +161,8 @@ export class HomePage implements OnInit {
             this.thisBinId = marker.title;
           });
         }
+      }
+        console.log('He cargado los marcadores');
 
       });
   }

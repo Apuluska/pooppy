@@ -205,8 +205,8 @@ export class HomePage implements OnInit {
     for(let i=0; i< this.markers.length; i++){
       if(this.markers[i].title === binId){
         //console.log("encontrado");
-        this.markers[i].setIcon('assets/img/bin_point_selected.png');
-        this.markers[i].icon = 'assets/img/bin_point_selected.png';
+        this.markers[i].setIcon('assets/img/bin_point_selected.svg');
+        this.markers[i].icon = 'assets/img/bin_point_selected.svg';
         this.idOfSelectedBin = binId;
         return;
       }

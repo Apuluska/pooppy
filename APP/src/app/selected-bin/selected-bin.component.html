@@ -14,13 +14,18 @@
         </div>
       </div>
     </button> -->
-    <button (click)="changeBinBag(selectedBinId)" class="bags">
-      <img src="../../assets/img/poo.svg">
-      <svg width="205" height="97" viewBox="0 0 205 97" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M162.794 97H42.2059C18.6912 97 0 75.5214 0 48.5C0 21.4786 18.6912 0 42.2059 0H162.794C186.309 0 205 21.4786 205 48.5C205 75.5214 186.309 97 162.794 97Z" fill="#70CCC6"/>
+    <button *ngIf="binInfo" (click)="changeBinBag(selectedBinId)" class="bags"  [ngClass]="{ 'red': !binInfo.bags }">
+      <img *ngIf="binInfo.bag" src="../../assets/img/poo.svg">
+      <img class="red" *ngIf="!binInfo.bag" src="../../assets/img/poo_red.svg">
+      <svg [ngClass]="{ 'red': binInfo.bags === 'false' }" width="205" height="97" viewBox="0 0 205 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M162.794 97H42.2059C18.6912 97 0 75.5214 0 48.5C0 21.4786 18.6912 0 42.2059 0H162.794C186.309 0 205 21.4786 205 48.5C205 75.5214 186.309 97 162.794 97Z"/>
         </svg>
     </button>
+<<<<<<< HEAD
     <button class="favorite" (click)="addFavorite(user._id, selectedBinId)">
+=======
+    <button class="favorite" [ngClass]="{ 'shine': userHasFavorite }" (click)="addFavorite(userId, selectedBinId)">
+>>>>>>> origin/duplicate
       <div class="imgStar">
       <img src="../../assets/icon/starFavorites.png">
       </div>

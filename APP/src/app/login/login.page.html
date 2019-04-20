@@ -10,13 +10,15 @@
       <img class="iconLog" src="../assets/icon/password_Icon.png">
       <input class="exampleText" placeholder="CONTRASEÑA" type=password [(ngModel)]=user.password>
       </ion-item>
-      <button class="button" (click)="onSubmitLogin()" expand="block" *ngIf="checkMail === true">Entra
+      <button class="button" (click)="onSubmitLogin()" expand="block" *ngIf="checkMail">Entra
+      </button>
+      <button class="button" color="primary" (click)="onSubmitLogin()" expand="block" *ngIf="!checkMail"> Regístrate
       </button>
   </ion-list>
-  <button class="button" color="primary" (click)="onSubmitLogin()" expand="block" *ngIf="checkMail === false"> Regístrate
-  </button>
 </ion-content>
 <ion-footer>
-    <div class=notRegistered>¿AÚN NO TE HAS REGISTRADO?<a (click)="goRegister()">Regístrate</a>
+    <div *ngIf="checkMail" class=notRegistered>¿AÚN NO TE HAS REGISTRADO?<a (click)="goRegister()">Regístrate</a>
+    </div>
+    <div *ngIf="!checkMail" class=notRegistered>¿YA TIENES UNA CUENTA?<a routerLink="/">INICIA SESIÓN</a>
     </div>
   </ion-footer>

@@ -20,7 +20,7 @@ export class SelectedBinComponent implements OnInit {
   public _selectedBinId: string;
   public binInfo: any;
   public users: User[];
-  public userId = this.storageService.getUsers();
+  public user: any;
 
   @Output() bagsChangedEvent = new EventEmitter<string>();
 
@@ -28,7 +28,9 @@ export class SelectedBinComponent implements OnInit {
     private usersService: UsersService,
     private binsService: BinsService,
     private storageService: StorageService
-  ) { }
+  ) {
+    this.getLocalStorage();
+  }
 
   get selectedBinId(): string {
     // transform value for display
@@ -45,7 +47,6 @@ export class SelectedBinComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getUserFavoriteBinsData(this.userId);
   }
 
   getOneBinInfo(selectedBinId: Bin['_id']): any {
@@ -55,6 +56,11 @@ export class SelectedBinComponent implements OnInit {
         this.binInfo = bin_observable;
         }
       );
+  }
+
+  async getLocalStorage() {
+    this.user = await this.storageService.getUsers();
+    await this.getUserFavoriteBinsData(this.user._id);
   }
 
   getUserFavoriteBinsData(userId): any {

@@ -12,7 +12,9 @@ class UserProvider {
     var favoriteBinsInfo = [];
     let binList = [];
     let resolvedFinalArray;
+    console.log("getfavoriteBinlist favoriteBins: " +  userId);  
     var infoUser = await userModel.findById(userId, (error, usuario) => {
+     console.log("getfavoriteBinlist favoriteBins: " +  usuario);
       var info = usuario.favoriteBins.map((binId) => {
         let binInfo = binProvider.findBinById(binId);
         favoriteBinsInfo.push(binInfo);
@@ -31,11 +33,13 @@ class UserProvider {
   }
 
   async addFavoriteBin(userId, idBin) {
+    console.log("add favorite userid + idbin: " + userId + ", " + idBin); 
     let binChange = await userModel.findByIdAndUpdate(
       userId,
       { $push: { favoriteBins: idBin } },
       { new: true }
     );
+    console.log("binchange" + binChange); 
     return binChange;
   }
 
@@ -54,7 +58,8 @@ class UserProvider {
       if (user.length === 0 || user == null) {
         return res.status(200).send(new userModel());
       } else {
-        /* return res.status(200).send(user[0]); */
+        console.log("usuario en login " + user[0]);
+        return res.status(200).send(user[0]);
         ///TODO REVISAR
         console.log('pass desde el front: ' + req.body.user.password);
         console.log('pass desde la bbdd: ' + user[0].password);

@@ -4,6 +4,7 @@ function binRoutes(app) {
 
     // Gets all the bins
     app.get("/bins", async function (req, res) {
+        console.log( "get bins" + req.params); 
         const bins = await BinProvider.findAll();
         await res.send(bins);
     });

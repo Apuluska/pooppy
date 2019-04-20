@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { User } from '../user';
 import { Bin } from '../bin';
@@ -14,13 +14,14 @@ import { BinsService } from '../services/bins.service';
 })
 
 export class SelectedBinComponent implements OnInit {
-  
+
   public favoriteBins: Bin[];
   public _selectedBinId: string;
   public binInfo: any;
   public users: User[];
   public active;
-  public userId = '5ca1fdf203f2ef6b8024750b'; 
+  public userId = '5ca1fdf203f2ef6b8024750b';
+  public userHasFavorite = false;
 
   @Output() bagsChangedEvent = new EventEmitter<string>();
 
@@ -37,62 +38,75 @@ export class SelectedBinComponent implements OnInit {
   @Input()
   set selectedBinId(selectedBinId: string) {
     this._selectedBinId = selectedBinId;
-    if(selectedBinId.length){
+    if (selectedBinId.length) {
       this.getOneBinInfo(selectedBinId);
+      this.getUserFavoriteBinsData(this.userId);
     }
-    console.log(this.active);
   }
 
 
   ngOnInit() {
-    this.getUserFavoriteBinsData(this.userId);
+    
   }
 
   getOneBinInfo(selectedBinId: Bin["_id"]): any {
     this.binsService.getOneBinInfo(selectedBinId)
       .subscribe(
         (bin_observable) => {
-        this.binInfo = bin_observable; 
+          this.binInfo = bin_observable;
+          
         }
       );
   }
 
+  
   getUserFavoriteBinsData(userId): any {
     this.usersService.getUserFavoriteBinsData(userId)
       .subscribe(
-        (bin_observable) => {
+        async(bin_observable) => {
           this.favoriteBins = [];
           // bin_observable.length
           console.log("hay " + bin_observable.length + " papeleras favoritas");
           for (let i = 0; i < bin_observable.length; i++) {
             this.favoriteBins.push(bin_observable[i]);
           }
-
+          await this.findBinInUserFavoriteAndColor();
         });
 
+  }
+
+  findBinInUserFavoriteAndColor(): boolean {
+    let findBin = this.favoriteBins.find(bin => { return bin._id === this.selectedBinId });
+    if (!findBin || (findBin._id !== this.selectedBinId)) {
+      this.userHasFavorite = false;
+    } else {
+      this.userHasFavorite = true;
+    }
+    console.log(this.userHasFavorite);
+    return this.userHasFavorite;
   }
 
 
   //Gets userId from the atribute of this class
   //Gets selectedBinId from home.page.ts
   addFavorite(userId: User["_id"], selectedBinId: Bin["_id"]): void {
-    const findBin = this.favoriteBins.find(bin => { return bin._id === selectedBinId });
-    if (!findBin) {
+    this.findBinInUserFavoriteAndColor();
+    if (!this.userHasFavorite) {
       this.usersService.addFavoriteBin(userId, selectedBinId)
         .subscribe();
+      console.log("add");
     } else {
       this.usersService.deleteBin(userId, selectedBinId)
         .subscribe();
+      console.log("delete");
     }
     this.getUserFavoriteBinsData(userId);
-    // this.homePage.getBinData();
   }
 
   changeBinBag(selectedBin: Bin["_id"]): void {
-  
     this.binsService.updateBinBags(selectedBin, !this.binInfo.bag).subscribe();
     this.bagsChangedEvent.next(selectedBin.toString());
   }
 
-  
+
 }

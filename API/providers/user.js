@@ -10,22 +10,36 @@ class UserProvider {
 
   async getFavoriteBinList(userId) {
     var favoriteBinsInfo = [];
-    let user = await userModel.findById(userId);
-    user.favoriteBins.map(async (binId) => {
-      let binInfo = binProvider.findBinById(binId);
-      favoriteBinsInfo.push(binInfo);
-      return favoriteBinsInfo;
+    let binList = [];
+    let resolvedFinalArray;
+    console.log("getfavoriteBinlist favoriteBins: " +  userId);  
+    var infoUser = await userModel.findById(userId, (error, usuario) => {
+     console.log("getfavoriteBinlist favoriteBins: " +  usuario);
+      var info = usuario.favoriteBins.map((binId) => {
+        let binInfo = binProvider.findBinById(binId);
+        favoriteBinsInfo.push(binInfo);
+        return favoriteBinsInfo;
+      });
+      resolvedFinalArray = Promise.all(info);
+      return resolvedFinalArray;
     });
-    const resolvedFinalArray = await Promise.all(favoriteBinsInfo);
-    return resolvedFinalArray;
+    await infoUser.favoriteBins.forEach(element => {
+      if (element != null) {
+        binList.push(element);
+      }
+    });
+/*     await console.log(binList);
+ */    return await binList;
   }
 
   async addFavoriteBin(userId, idBin) {
+    console.log("add favorite userid + idbin: " + userId + ", " + idBin); 
     let binChange = await userModel.findByIdAndUpdate(
       userId,
       { $push: { favoriteBins: idBin } },
       { new: true }
     );
+    console.log("binchange" + binChange); 
     return binChange;
   }
 
@@ -38,51 +52,78 @@ class UserProvider {
   }
 
   login(req, res) {
-    userModel.find({ email: req.body.email }, (err, user) => {
+    userModel.find({ email: req.body.user.email }, (err, user) => {
+      console.log('llega'+user);
       if (err) return res.status(500).send({ message: err })
-      bcrypt.compare(req.body.password, user[0].password, function (err, check) {
-        console.log(user[0].password);
-        if (check) {
-          return res.status(200).send({
-            message: "Te has logado correctamente",
-            token: service.createToken(user)
-          })
-        } else {
-          return res.status(200).send({ message: "Usuario o clave incorrecta" })
-        }
-      });
+      if (user.length === 0 || user == null) {
+        return res.status(200).send(new userModel());
+      } else {
+        console.log("usuario en login " + user[0]);
+        return res.status(200).send(user[0]);
+        ///TODO REVISAR
+        console.log('pass desde el front: ' + req.body.user.password);
+        console.log('pass desde la bbdd: ' + user[0].password);
+        bcrypt.compare(req.body.user.password, user[0].password, function (err, check) {
+          console.log("entra aqui eerr" + err);
+          console.log("entra aqui2" + check);
+
+          if (check) {
+            return res.status(200).send({
+              message: "Te has logado correctamente",
+              token: service.createToken(user)
+            })
+          } else {
+            return res.status(200).send({ message: "Usuario o clave incorrecta" })
+          }
+        });
+          return null;
+          /*      
+         
+               bcrypt.compare(req.body.password, user[0].password, function (err, check) {
+                 console.log(user[0].password);
+                 if (check) {
+                   return res.status(200).send({
+                     message: "Te has logado correctamente",
+                     token: service.createToken(user)
+                   })
+                 } else {
+                   return res.status(200).send({ message: "Usuario o clave incorrecta" })
+                 }
+               });
+        }) */
+      }
     })
   }
 
-  async register(req, res) {
-    if(userExists(req.body.email)){
-      res.status(200).send({message: 'Usuario ya existe'})
-  }
-    var saltRounds = 10;
-    await bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
-      const user = new userModel({
-        email: req.body.email,
-        password: hash
-      });
+      async register(req, res) {
+        if (userExists(req.body.email)) {
+          res.status(200).send({ message: 'Usuario ya existe' })
+        }
+        var saltRounds = 10;
+        await bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
+          const user = new userModel({
+            email: req.body.email,
+            password: hash
+          });
 
-      await user.save((err) => {
-        if (err) res.status(500).send({
-          message: `Error al crear usuario: $(err)`
-        })
-        res.status(200).send({ token: service.createToken(user) })
-      });
-    
-    });
-  }
+          await user.save((err) => {
+            if (err) res.status(500).send({
+              message: `Error al crear usuario: $(err)`
+            })
+            res.status(200).send({ token: service.createToken(user) })
+          });
 
-  userExists(userEmail){
-    userModel.find({email: userEmail}, function(err, user){
-        if(user.length){
+        });
+      }
+
+      userExists(userEmail) {
+        userModel.find({ email: userEmail }, function (err, user) {
+          if (user.length) {
             return true;
-        }else{
+          } else {
             return false;
-        }
-    })
-}
-}
+          }
+        })
+      }
+    }
 module.exports = new UserProvider();

@@ -24,7 +24,7 @@ export class HomePage implements OnInit {
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
     private binsService: BinsService,
-    private selectedBin: SelectedBinComponent 
+    private selectedBin: SelectedBinComponent
   ) {
 
   }
@@ -47,7 +47,7 @@ export class HomePage implements OnInit {
       title: 'Acerca de',
       url: '/menu/about',
       icon: 'infoicon.png',
-      src: '/../assets/icon/infoicon.png'
+      src: '../assets/icon/infoicon.png'
     },
   ];
 
@@ -60,8 +60,8 @@ export class HomePage implements OnInit {
   idOfSelectedBin = null;
 
   ngOnInit() {
+
     this.loadMap();
-    this.getBinData();
   }
 
 
@@ -117,14 +117,15 @@ export class HomePage implements OnInit {
       loading.dismiss();
       this.addMaker(myLatLng.lat, myLatLng.lng);
     });
+    console.log('He cargado el mapa');
+    this.getBinData();
   }
-  
   public addMaker(lat: number, lng: number) {
-      const marker= new google.maps.Marker({
+      const marker = new google.maps.Marker({
       position: { lat, lng },
       map: this.mapRef,
       title: 'Hello World!',
-      icon: 'assets/img/bin_point_true.svg',
+      icon: 'assets/img/geolocation.svg',
     });
 
   }
@@ -137,23 +138,23 @@ export class HomePage implements OnInit {
     };
   }
 
-  getBinData(): void {           
+  getBinData(): void {
      this.binsService.getBinData()
       .subscribe(
       (bin_observable) => {
        // bin_observable.length
         let iconBin;
-        this.clearMarkers();
-        for(let i = 0; i < 20;i++){
-          let lat = parseFloat(bin_observable[i].address[0].lat);
-          let lng = parseFloat(bin_observable[i].address[0].lng);
-          let statusBin= bin_observable[i].bag;
-          if (statusBin===true){
-            iconBin= 'assets/img/bin_point_true.svg'}
-          else{
-            iconBin= 'assets/img/bin_point_false.svg'
+          this.clearMarkers();        
+          for (let i = 0; i < bin_observable.length; i++) {
+          if (bin_observable != null && bin_observable[i].address != null) {
+          const lat = parseFloat(bin_observable[i].address[0].lat);
+          const lng = parseFloat(bin_observable[i].address[0].lng);
+          const statusBin = bin_observable[i].bag;
+          if (statusBin === true) {
+            iconBin = 'assets/img/bin_point_true.svg'; } else {
+            iconBin = 'assets/img/bin_point_false.svg';
           }
-         const marker=  new google.maps.Marker({
+         const marker =  new google.maps.Marker({
             position: { lat, lng },
             map: this.mapRef,
             title: bin_observable[i]._id,
@@ -191,10 +192,12 @@ export class HomePage implements OnInit {
               this.selectBin(marker.title);
             }
             this.selectedBin.getOneBinInfo(marker.title);
-            this.thisBinId = marker.title
+            this.thisBinId = marker.title;
           });
           this.markers.push(marker);
         }
+      }
+        console.log('He cargado los marcadores');
 
       });
   }

@@ -12,7 +12,7 @@ app.use(cors());
 
 mongoose.connect("mongodb://localhost:27017/pooppyDB", {useNewUrlParser: true}, function(err) {
   if (err){
-      console.log("Error");
+      console.log("Error no he podido conectar con la base de datos");
   }else{
       console.log("Connected to database");
   }

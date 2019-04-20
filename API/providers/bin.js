@@ -22,6 +22,12 @@ class BinProvider{
   })
     return binChange;
   }
+  async findByUser(arrayBin){
+    console.log("la lista de binid es: " + arrayBin)
+    const bins =  await binModel.find({_id: arrayBin});
+    await console.log("la lista de bins por usuario es: " + bins);
+    return await bins;
+};
 }
 
 module.exports = new BinProvider;

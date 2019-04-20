@@ -4,10 +4,11 @@ function userRoutes(app) {
 
     // Gets all the info of the favorite bins that a user has 
     app.get("/user/:id/favoritebins", async function (req, res) {
+        console.log( "get favoritebin" + req.params.id);
         let userId = req.params.id;
         const favoriteBins = await UserProvider.getFavoriteBinList(userId);
         res.send(favoriteBins);
-    });
+    }); 
 
     // Add the selected bin into the favorite bin list
     app.post("/user/favoritebins/add", async function (req, res) {
@@ -28,14 +29,13 @@ function userRoutes(app) {
         res.send(user);
     });
 
-    app.post("/user/login", async function (req, res) {
-        await UserProvider.login(req,res);
+    app.post("/user/login", function (req, res) {
+     UserProvider.login(req,res);
     });
 
     app.post("/user/register", async function (req, res) {
         await UserProvider.register(req,res);
     });
-
 }
 
 module.exports = userRoutes;

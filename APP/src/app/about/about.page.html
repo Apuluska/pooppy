@@ -1,38 +1,27 @@
 <ion-header>
     <ion-toolbar class="title">
-        <ion-buttons slot="start">
-          <button class="backArrow" (click)="backClicked()">  
-          <ion-icon name="arrow-back"></ion-icon>
-          </button>
-        </ion-buttons>
-        <ion-title>Ayuda</ion-title>
+      <ion-buttons slot="start">
+        <button class="backArrow" (click)="backClicked()">
+          <img src="../../assets/img/back-arrow.svg">
+        </button>
+      </ion-buttons>
+      <ion-title>Acerca de</ion-title>
     </ion-toolbar>
   </ion-header>
-<ion-content>
-  <a href="menu/termsconditions">
-    <p class="p" expand="full">Términos y condiciones
-    <img class="arrow" src="../assets/icon/Arrow.svg">
-    </p>
+<ion-content class="about">
+  <a routerLink="/menu/termsconditions">
+    <button>Términos y Condiciones
+      <img class="arrow-green" src="../../assets/img/green-arrow.svg">
+    </button>
   </a>
-
-  <br>
-
-  <hr noshade>
-  <a href="menu/privacypolicy">
-    <p class="p" expand="full">Política de Privacidad
-    <img class="arrow" src="../assets/icon/Arrow.svg">
-    </p>
+  <a routerLink="/menu/privacypolicy">
+    <button>Política de Privacidad
+        <img class="arrow-green" src="../../assets/img/green-arrow.svg">
+      </button>
   </a>
-
-
-  <br>
-  <hr noshade>
-  <a href="menu/team">
-    <p class="p" expand="full">El equipo
-    <img class="arrow" src="../assets/icon/Arrow.svg">
-    </p>
+  <a routerLink="/menu/team">
+    <button>Equipo
+        <img class="arrow-green" src="../../assets/img/green-arrow.svg">
+    </button>
   </a>
-
-  <br>
-  <hr noshade>
 </ion-content>

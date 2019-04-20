@@ -1,52 +1,82 @@
 .iconDog {
-    margin-top: 30%;
+    margin-bottom: 30%;
     max-width: 100%;
     border-radius: 100%;
     height: 50%;
     width: 50%;
-    border: 6px solid #70CCC6;
+    border: 5px solid #70CCC6;
+}
+.list.login{
+    position: absolute;
+    bottom: 0;
+    width: 90%;
 }
 .button {
-    width: 80%;
-    height: 5%;
+    width: 90%;
+    text-transform: uppercase;
+    padding: 20px 0;
     background: #70CCC6;
-    border-radius: 8px;
-    font-family: 'Raleway', sans-serif, bold;
-    font-weight: bold;
+    border-radius: 3px;
+    font-weight: var(--font-bold);
     color: white;
-    font-size: 90%;
+    font-size: 14px;
+    margin-top: 70px;
 }
 .exampleText {
     width: 80%;
     font-family: 'Raleway', sans-serif;
-    font-size: 90%;
-    color: #D8D8D8;
+    font-size: 14px;
+    color: var(--blue);
+    font-weight: var(--font-bold);
+    padding: 5px 10px;
+    margin: 0 0 0 10px;
+    border: 0;
+    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #D8D8D8;
+        opacity: 1; /* Firefox */
+      }
+      
+      &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #D8D8D8;
+      }
+      
+      &::-ms-input-placeholder { /* Microsoft Edge */
+        color: #D8D8D8;
+      }
 }
 .iconLog {
-    width: 6%;
+    width: 30px;
 }
-.registered {
-    font-family: 'Raleway', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 60%;
-    line-height: 20px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #868686;
-    mix-blend-mode: normal;
+.footer-md:before{
+    background-image: none;
 }
-    .notRegistered {
-    color: #868686;
-    font-family: 'Raleway', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 60%;
-    line-height: 20px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    mix-blend-mode: normal;
-    margin-left: 10%;
+.ion-page{
+    text-align: center;
+    .registered {
+        font-family: 'Raleway', sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 10px;
+        line-height: 20px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #868686;
+        mix-blend-mode: normal;
+    }
+        .notRegistered {
+        color: #868686;
+        font-family: 'Raleway', sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 10px;
+        line-height: 20px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        mix-blend-mode: normal;
+        a{
+            margin-left: 10px;
+        }
+    }
 }
     a {
     display: inline;
@@ -59,4 +89,14 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     mix-blend-mode: normal;
+}
+ion-footer {
+    display: block;
+    position: relative;
+    -ms-flex-order: 1;
+    order: 1;
+    width: 100%;
+    z-index: 10;
+    height: 7%;
+    padding-top: 3%;
 }

@@ -51,6 +51,10 @@ onSubmitLogin() {
   goRegister() {
     this.checkMail = false;
   }
+
+  goLogin() {
+    this.checkMail = true;
+  }
   logOut() {
     this.authService.login(this.user);
   }

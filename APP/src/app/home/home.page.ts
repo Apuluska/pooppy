@@ -143,6 +143,7 @@ export class HomePage implements OnInit {
       .subscribe(
       (bin_observable) => {
        // bin_observable.length
+       console.log("get bin data");
         let iconBin;
           this.clearMarkers();        
           for (let i = 0; i < 20; i++) {
@@ -170,22 +171,7 @@ export class HomePage implements OnInit {
               this.unselectBin(this.thisBinId);
             }
 
-            console.log("Esto es lo que hay");
-            console.log(this.idOfSelectedBin);
-            console.log(marker.icon)
-            if(this.idOfSelectedBin){
-              console.log("Primera true");
-            }else{
-              console.log("Primera false");
-
-            }
-
-            if(marker.title === this.thisBinId){
-              console.log("Segunda true");
-            }else{
-              console.log("Segunda false");
-            }
-
+            
             if(this.idOfSelectedBin && marker.title === this.thisBinId){
               this.unselectBin(marker.title);
             }else{
@@ -235,6 +221,7 @@ export class HomePage implements OnInit {
   }
 
   clearMarkers(): void{
+    console.log("clear markers")
     for(let i=0;i<this.markers.length;i++){
       this.markers[i].setMap(null);
     }

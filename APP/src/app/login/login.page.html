@@ -19,6 +19,6 @@
 <ion-footer>
     <div *ngIf="checkMail" class=notRegistered>¿AÚN NO TE HAS REGISTRADO?<a (click)="goRegister()">Regístrate</a>
     </div>
-    <div *ngIf="!checkMail" class=notRegistered>¿YA TIENES UNA CUENTA?<a routerLink="/">INICIA SESIÓN</a>
+    <div *ngIf="!checkMail" class=notRegistered>¿YA TIENES UNA CUENTA?<a  (click)="goLogin()">INICIA SESIÓN</a>
     </div>
   </ion-footer>

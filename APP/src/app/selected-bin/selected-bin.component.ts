@@ -20,13 +20,10 @@ export class SelectedBinComponent implements OnInit {
   public _selectedBinId: string;
   public binInfo: any;
   public users: User[];
-<<<<<<< HEAD
   public user: any;
-=======
   public active;
-  public userId = '5ca1fdf203f2ef6b8024750b';
+  public userId = '5c9b28545f02671f443fb996';
   public userHasFavorite = false;
->>>>>>> origin/duplicate
 
   @Output() bagsChangedEvent = new EventEmitter<string>();
 
@@ -54,35 +51,24 @@ export class SelectedBinComponent implements OnInit {
 
 
   ngOnInit() {
-<<<<<<< HEAD
-=======
     
->>>>>>> origin/duplicate
   }
 
   getOneBinInfo(selectedBinId: Bin['_id']): any {
     this.binsService.getOneBinInfo(selectedBinId)
       .subscribe(
         (bin_observable) => {
-<<<<<<< HEAD
-        this.binInfo = bin_observable;
-=======
           this.binInfo = bin_observable;
           
->>>>>>> origin/duplicate
         }
       );
   }
 
-<<<<<<< HEAD
   async getLocalStorage() {
     this.user = await this.storageService.getUsers();
     await this.getUserFavoriteBinsData(this.user._id);
   }
 
-=======
-  
->>>>>>> origin/duplicate
   getUserFavoriteBinsData(userId): any {
     this.usersService.getUserFavoriteBinsData(userId)
       .subscribe(
@@ -109,19 +95,16 @@ export class SelectedBinComponent implements OnInit {
   }
 
 
-<<<<<<< HEAD
   // Gets userId from the atribute of this class
   // Gets selectedBinId from home.page.ts
-  addFavorite(userId: User['_id'], selectedBinId: Bin['_id']): void {
-    const findBin = this.favoriteBins.find(bin => bin._id === selectedBinId);
-    if (!findBin) {
-=======
+ // addFavorite(userId: User['_id'], selectedBinId: Bin['_id']): void {
+    //const findBin = this.favoriteBins.find(bin => bin._id === selectedBinId);
+      //if (!findBin) {
   //Gets userId from the atribute of this class
   //Gets selectedBinId from home.page.ts
   addFavorite(userId: User["_id"], selectedBinId: Bin["_id"]): void {
     this.findBinInUserFavoriteAndColor();
     if (!this.userHasFavorite) {
->>>>>>> origin/duplicate
       this.usersService.addFavoriteBin(userId, selectedBinId)
         .subscribe();
       console.log("add");
@@ -133,18 +116,10 @@ export class SelectedBinComponent implements OnInit {
     this.getUserFavoriteBinsData(userId);
   }
 
-<<<<<<< HEAD
-  changeBinBag(selectedBin: Bin['_id']): void {
-=======
   changeBinBag(selectedBin: Bin["_id"]): void {
->>>>>>> origin/duplicate
     this.binsService.updateBinBags(selectedBin, !this.binInfo.bag).subscribe();
     this.bagsChangedEvent.next(selectedBin.toString());
   }
 
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/duplicate

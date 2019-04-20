@@ -20,7 +20,9 @@ class UserProvider {
         favoriteBinsInfo.push(binInfo);
         return favoriteBinsInfo;
       });
+
       resolvedFinalArray = Promise.all(info);
+
       return resolvedFinalArray;
     });
     await infoUser.favoriteBins.forEach(element => {
@@ -28,8 +30,9 @@ class UserProvider {
         binList.push(element);
       }
     });
-/*     await console.log(binList);
- */    return await binList;
+//     await console.log(binList);
+
+     return await binList;
   }
 
   async addFavoriteBin(userId, idBin) {
@@ -39,7 +42,6 @@ class UserProvider {
       { $push: { favoriteBins: idBin } },
       { new: true }
     );
-    console.log("binchange" + binChange); 
     return binChange;
   }
 

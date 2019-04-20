@@ -6,17 +6,18 @@
   font-family: var(--font) !important;
   --border-style: none;
   font-weight: 400;
+  text-align: left;
+  font-size: 16px;
 }
 .list-md {
   background: var(--blue, var(--blue, --blue));
 }
 .menuIcon {
   width: 20px;
-  margin-left: 10px;
+  margin: 10px;
 }
 .titlePages {
-  color: white;
-  padding: 0 0 10px 0;
+  color: white; 
   background-color: var(--blue);
 }
 .dogAvatar {

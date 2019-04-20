@@ -69,7 +69,6 @@ export class SelectedBinComponent implements OnInit {
         (bin_observable) => {
           this.favoriteBins = [];
           // bin_observable.length
-          console.log('hay ' + bin_observable.length + ' papeleras favoritas');
           for (let i = 0; i < bin_observable.length; i++) {
             this.favoriteBins.push(bin_observable[i]);
           }

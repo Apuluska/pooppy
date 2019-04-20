@@ -2,7 +2,7 @@
   <ion-toolbar class="title">
     <ion-buttons slot="start">
       <button class="backArrow" (click)="backClicked()">
-        <ion-icon name="arrow-back"></ion-icon>
+        <img src="../../assets/img/back-arrow.svg">
       </button>
     </ion-buttons>
     <ion-title>Papeleras favoritas</ion-title>
@@ -10,13 +10,11 @@
 </ion-header>
 <ion-content>
   <ul>
-    <li *ngFor="let bin of bins">
-      <div *ngIf="bin != null && bin.address != null" class=binFavs>{{bin.address[0].addressName}}
-        <button class="deletedBinButton" (click)="deleteBin(bin._id)">
-          <img class="deletedBin" src="../../assets/img/deletedBin.png">
-        </button>
-        <hr noshade>
-      </div>
+    <li *ngFor="let bin of bins" class=binFavs>
+      <img *ngIf="bin.bag === false" class="bin-list-bin" (click)="deleteBin(bin._id)" src="../../assets/img/favorite_list_false.svg">
+      <img *ngIf="bin.bag === true" class="bin-list-bin" (click)="deleteBin(bin._id)" src="../../assets/img/favorite_list_true.svg">
+      <p>{{bin.address[0].addressName}} </p>
+      <img (click)="deleteBin(bin._id)" class="deletedBin" src="../../assets/img/deletedBin.svg">
     </li>
   </ul>
 </ion-content>

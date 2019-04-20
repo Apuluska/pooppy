@@ -1,83 +1,120 @@
-p{
+.favorite-tab {
+  position: absolute;
+  width: 100%;
+  height: 190px;
+  bottom: 0;
+  z-index: 1;
+  background-color: var(--white);
+  transition: 0.8s bottom ease-in-out;
+  text-align: left;
+  p {
     font-weight: var(--font-medium);
     padding: 20px;
     margin: 0;
     border-bottom: 1px solid var(--dark-gray);
+    text-transform: capitalize;
+  }
 }
-.buttons{
-    height: 150px;
-    margin-top: 10%;
-    margin-bottom: 2%;
-}
-.favorite{
+.buttons {
+  height: 150px;
+  margin-bottom: 2%;
+  .favorite {
     width: 40%;
-    height: 90px;
-    background-color: #70CCC6;
-    margin-left: 6%;
+    background-color: #EAF7F6;
+    margin-left: 2%;
     border-radius: 12px;
-    padding: 10%;
+    .imgStar {
+      width: 60px;
+      margin: 0 auto;
+      img{
+        margin: 20px 0; 
+      }
+    }
+  }
+
+  .bags {
+    width: 52%;
+    margin: 4% 0 5% 3%;
+    background: #f2f2f2;
+    border-radius: 10px;
+    img{
+        width: 70px;
+    position: absolute;
+    top: 90px;
+    left: 100px;
+    transition: .8s left;
+    }
+    svg {
+      width: 100px;
+    }
+  }
+  .bagsOn {
+    width: 52%;
+    margin: 4% 0 5% 3%;
+    background: #f2f2f2;
+    border-radius: 10px;
+    img{
+        width: 70px;
+    position: absolute;
+    top: 90px;
+    left: 40px;
+    transition: .8s left;
+    }
+    svg {
+      width: 100px;
+    }
+  }
 }
 
-.bags{
-    height: 90px;
-    width: 52%;
-    margin-left: 1%;
-    background: #F2F2F2;
-    border-radius: 10px;
-}
-     
 .switch-label {
-    position: relative;
-    z-index: 2;
-    float: left;
-    width: 58px;
-    line-height: 26px;
-    text-align: center;
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 58px;
+  line-height: 26px;
+  text-align: center;
 }
-      
+
 .switch-label-off {
-    padding-left: 2px;
-}   
-      
+  padding-left: 2px;
+}
+
 .switch-label-on {
-    padding-right: 2px;
+  padding-right: 2px;
 }
 .switch-input {
-    display: none;
-
-    }
+  display: none;
+}
 /* mueve la bola a no a la izquierda */
 .switch-input:checked + .switch-label-on ~ .switch-selection {
-    left: 50%;
-    background: red;
-
+  left: 50%;
+  background: red;
 }
-/*       bola grande*/ 
+/*       bola grande*/
 .switch-selection {
-    position: absolute;
-    z-index: 1;
-    top: -18px;
-    left: 0%;
-    display: block;
-    width: 85px;
-    height: 85px;
-    border-radius: 100px;
-    background:var(--blue);
-    opacity: 5;
-
+  position: absolute;
+  z-index: 1;
+  top: -18px;
+  left: 0%;
+  display: block;
+  width: 85px;
+  height: 85px;
+  border-radius: 100px;
+  background: var(--blue);
+  opacity: 5;
 }
 .switch {
-    position: relative;
-    height: 40px;
-    width: 80%;
-    margin: 20px auto;
-    background: var(--blue);
-    opacity: 0.4;
-    border-radius: 30px;
+  position: relative;
+  height: 40px;
+  width: 80%;
+  margin: 20px auto;
+  background: var(--blue);
+  opacity: 0.4;
+  border-radius: 30px;
 }
 
-.hide{
-    position: absolute;
-    bottom: -200px;
-    transition: .8s bottom ease-in-out;
+.hide {
+  position: absolute;
+  bottom: -200px;
+  transition: 0.8s bottom ease-in-out;
 }

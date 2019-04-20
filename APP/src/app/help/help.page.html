@@ -1,26 +1,40 @@
 <ion-header>
   <ion-toolbar class="title">
-      <ion-buttons slot="start">
-        <button class="backArrow" (click)="backClicked()">  
-        <ion-icon name="arrow-back"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-title>Ayuda</ion-title>
+    <ion-buttons slot="start">
+      <button class="backArrow" (click)="backClicked()">
+        <img src="../../assets/img/back-arrow.svg">
+      </button>
+    </ion-buttons>
+    <ion-title>Ayuda</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <button class="frecuencyQuestions" (click)="showMeTheText()">Preguntas
-    frecuentes</button>
-  <div *ngIf="showButton === true">
-    <h3 class="question">Aquí van algunas de las preguntas más frecuentes</h3>
+<ion-content class="help">
+  <button [ngClass]="{ 'question': showButton === 1 }" (click)="showMeTheText(1)">¿Esto es una pregunta frecuente?
+    <img [ngClass]="showButton === 1 ? 'arrow-green down' : 'arrow-green'" src="../../assets/img/green-arrow.svg">
+  </button>
+  <div [ngClass]="{ 'question-content': showButton === 1 }">
     <p>A continuación, se desglosa la respuesta a las preguntas.</p>
+
+  </div>
+  <button [ngClass]="{ 'question': showButton === 2 }" (click)="showMeTheText(2)">¿Esto es una pregunta frecuente?
+    <img [ngClass]="showButton === 2 ? 'arrow-green down' : 'arrow-green'" src="../../assets/img/green-arrow.svg">
+  </button>
+  <div [ngClass]="{ 'question-content': showButton === 2 }">
+    <p>A continuación, se desglosa la respuesta a las preguntas.</p>
+
+  </div>
+  <button [ngClass]="{ 'question': showButton === 3 }" (click)="showMeTheText(3)">¿Esto es una pregunta frecuente?
+    <img [ngClass]="showButton === 3 ? 'arrow-green down' : 'arrow-green'" src="../../assets/img/green-arrow.svg">
+  </button>
+  <div [ngClass]="{ 'question-content': showButton === 3}">
+    <p>A continuación, se desglosa la respuesta a las preguntas.</p>
+
   </div>
 
-  <button class="contact" (click)="showMeTheP()">Contacto</button>
-  <div *ngIf="showText === true">
-    <h3>Correo electrónico</h3>
-    <p>pooppy@gmail.com</p>
-  </div>
+
+  <a href="mailto: abc@example.com">
+    <button class="contact">CONTACTO: <span> pooppy@gmail.com</span></button>
+  </a>
 
 </ion-content>

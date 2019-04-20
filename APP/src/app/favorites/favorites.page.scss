@@ -1,13 +1,36 @@
 
 .binFavs{
-  position: relative;
+  font-family: var(--font) !important;
+  text-transform: inherit;
+  border-bottom: 1px solid  var(--dark-gray);
+  display: table;
+  width:100%;
+  padding: 10px;
+  font-size: 14px;
+  *{
+    display: inline-block;
+    vertical-align: middle
+  }
+  p{
+    width: 75%;
+  }
   .deletedBin{
-    position: absolute;
-    right: 10%;
+    width: 20px;
+    margin-right: 2%;
+  }
+  .bin-list-bin{
+    width: 30px;
+    margin-right: 5%;
+    margin-left: 2%;
   }
 }
 
-.title ion-title{
-  padding-left: 18%;
-}
+
+ul{
+  margin: 0;
+  padding: 0;
+  li{
+    list-style: none;
+  }
   
+}

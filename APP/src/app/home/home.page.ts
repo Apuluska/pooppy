@@ -145,7 +145,7 @@ export class HomePage implements OnInit {
        // bin_observable.length
         let iconBin;
           this.clearMarkers();        
-          for (let i = 0; i < bin_observable.length; i++) {
+          for (let i = 0; i < 20; i++) {
           if (bin_observable != null && bin_observable[i].address != null) {
           const lat = parseFloat(bin_observable[i].address[0].lat);
           const lng = parseFloat(bin_observable[i].address[0].lng);

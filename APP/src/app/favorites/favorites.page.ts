@@ -35,8 +35,8 @@ export class FavoritesPage implements OnInit {
   // this.bins = [];
   async getFavoriteBinData() {
 
-    /*     const userId = '5c9b28545f02671f443fb996';
-     */
+    const userId = '5c9b28545f02671f443fb996';
+    
     const user = await this.storageService.getUsers();
     await this.usersService.getUserFavoriteBinsData(user._id)
       .subscribe(

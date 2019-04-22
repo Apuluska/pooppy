@@ -20,6 +20,7 @@
   margin-bottom: 2%;
   .favorite {
     width: 40%;
+    outline: none;
     background-color: var(--blue);
     margin-left: 2%;
     border-radius: 12px;
@@ -44,6 +45,7 @@
     background-color: rgba(112, 204, 198, .15);
     border-radius: 10px;
     position: relative;
+    outline: none;
     &.red{
       background-color: rgba(214, 113, 113, .15);
     }
